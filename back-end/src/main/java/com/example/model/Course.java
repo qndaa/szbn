@@ -39,8 +39,8 @@ public class Course {
     @Column(name = "price", nullable = false)
     private double price;
 
-    @OneToMany(mappedBy = "course")
-    private Set<Mark> marks = new HashSet<>();
+//    @OneToMany(mappedBy = "course")
+//    private Set<Mark> marks = new HashSet<>();
 
     @Column(name = "year", nullable = false)
     private LocalDateTime year;
