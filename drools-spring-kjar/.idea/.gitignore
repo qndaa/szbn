@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../../:\Users\ilija\OneDrive\Desktop\sbnz\drools-spring\drools-spring-kjar\.idea/dataSources/
+/../../../../../../../../:\Users\ilija\OneDrive\Desktop\drools-spring\drools-spring-kjar\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
