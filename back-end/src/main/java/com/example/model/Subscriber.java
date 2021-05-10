@@ -28,4 +28,7 @@ public class Subscriber extends User{
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "category")
     private CategoryOfUser categoryOfUser;
+
+    @Column(name="discount")
+    private double discount;
 }
