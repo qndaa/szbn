@@ -1,6 +1,7 @@
 import React from "react";
 import CourseListing from "../components/courses/courseListing";
 import CourseSearchPane from "../components/courses/courseSearchPane";
+import SubscriberLayout from "../layouts/subscriberLayout";
 
 class UserHome extends React.Component {
     constructor(props) {
@@ -49,10 +50,10 @@ class UserHome extends React.Component {
 
     render() {
         return (
-            <>
-            <CourseSearchPane/>
-            <CourseListing courses={this.state.courses}/>
-            </>
+            <SubscriberLayout>
+                <CourseSearchPane/>
+                <CourseListing courses={this.state.courses}/>
+            </SubscriberLayout>
         )
     }
 }
