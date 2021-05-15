@@ -114,18 +114,7 @@ class CourseSearchPane extends React.Component {
             [name] : value
         })
     }
-
-    showPane = () => {
-        this.setState({
-            show : true
-        })
-    }
-
-    hidePane = () => {
-        this.setState({
-            show : false
-        })
-    }
+    
 }
 
 export default CourseSearchPane
