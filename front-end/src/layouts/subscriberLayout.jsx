@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Nav, Navbar, NavLink} from "react-bootstrap";
+import {Container, Nav, Navbar, NavLink, Row} from "react-bootstrap";
 
 class SubscriberLayout extends React.Component {
     render() {
@@ -19,7 +19,9 @@ class SubscriberLayout extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
+                <Container className={'p-5'}>
                 {this.props.children}
+                </Container>
             </Container>
         )
     }
