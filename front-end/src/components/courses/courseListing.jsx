@@ -1,7 +1,7 @@
 import React from "react";
 import CourseCard from "./courseCard";
 import {CardDeck, Card, CardGroup, Row, CardColumns} from "react-bootstrap";
-import course from "./../course.jpg"
+import course from "../../course.jpg"
 
 class CourseListing extends React.Component {
     render() {

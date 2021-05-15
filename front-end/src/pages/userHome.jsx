@@ -1,5 +1,6 @@
 import React from "react";
-import CourseListing from "../components/courseListing";
+import CourseListing from "../components/courses/courseListing";
+import CourseSearchPane from "../components/courses/courseSearchPane";
 
 class UserHome extends React.Component {
     constructor(props) {
@@ -48,7 +49,10 @@ class UserHome extends React.Component {
 
     render() {
         return (
+            <>
+            <CourseSearchPane/>
             <CourseListing courses={this.state.courses}/>
+            </>
         )
     }
 }

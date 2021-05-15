@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
-import course from "../course.jpg";
+import course from "../../course.jpg";
 
 class CourseCard extends React.Component {
     render() {
