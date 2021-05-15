@@ -1,9 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import UserHome from "./pages/userHome";
 
 function App() {
   return (
-    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={UserHome}/>
+        </Switch>
+      </BrowserRouter>
+    /*<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,7 +25,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </div>*/
   );
 }
 
