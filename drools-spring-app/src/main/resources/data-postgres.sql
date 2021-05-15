@@ -1,0 +1,1 @@
+INSERT INTO Areas (area_id, name) VALUES ('27a25265-97b8-49a6-8f58-4f2889211d2f', 'AI');
