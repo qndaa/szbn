@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/drools-spring-app.iml" filepath="$PROJECT_DIR$/drools-spring-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../drools-spring-kjar/drools-spring-kjar.iml" filepath="$PROJECT_DIR$/../drools-spring-kjar/drools-spring-kjar.iml" />
     </modules>
   </component>
 </project>

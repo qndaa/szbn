@@ -37,6 +37,6 @@ public abstract class User {
     private String password;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "typeOfUser", nullable = false)
+    @Column(name = "type_of_user", nullable = false)
     private TypeOfUser typeOfUser;
 }
