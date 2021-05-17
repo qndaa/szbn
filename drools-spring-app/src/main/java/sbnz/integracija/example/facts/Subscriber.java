@@ -29,5 +29,5 @@ public class Subscriber extends User{
     private CategoryOfUser categoryOfUser;
 
     @Column(name="discount")
-    private double discount;
+    private Double discount;
 }

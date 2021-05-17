@@ -1,14 +1,14 @@
-package sbnz.integracija;
-
-import sbnz.integracija.example.enums.CategoryOfUser;
-import sbnz.integracija.example.facts.Subscriber;
-
-
-rule "Silver Users - 10%"
-    when
-        $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
-    then
-        System.out.println("Usao u pravilo SILVER");
-        $s.setDiscount(10.0);
-        update($s);
-end
+//package sbnz.integracija;
+//
+//import sbnz.integracija.example.enums.CategoryOfUser;
+//import sbnz.integracija.example.facts.Subscriber;
+//
+//
+//rule "Silver Users - 10%"
+//    when
+//        $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
+//    then
+//        System.out.println("Usao u pravilo SILVER");
+//        $s.setDiscount(10.0);
+//        update($s);
+//end

@@ -1,0 +1,21 @@
+//import sbnz.integracija.example.facts.Course;
+//import sbnz.integracija.example.facts.Subscriber;
+//import sbnz.integracija.example.enums.PopularityCategory;
+//import java.util.List;
+//
+rule "not popular course -> less than 5 subsribers"
+    no-loop
+    when
+        $course: Course($c: title)
+        $s: List() from collect(Subsrciber())
+        Number(intValue < 5) from accumulate(
+            $ss: Subscriber() from $s and
+            $cc: List() from collect(Course(title == $c) from $s.getSubscribedCourses()),
+//            Subscriber($cs: subscribedCourses) from $s and
+//            $oc: Course(title == $c) from $cs,
+            count($cc)
+        )
+    then
+        $course.setPopularity(PopularityCategory.NOT_POPULAR);
+        update($course)
+end
