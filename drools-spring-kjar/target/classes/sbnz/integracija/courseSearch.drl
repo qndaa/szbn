@@ -1,0 +1,10 @@
+import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.dto.CourseSearchDTO;
+
+rule "title, area, price + 2 other criteria -> first category"
+    when
+        CourseSearchDTO($t: title, $a: area, $au: author, $g: grade, $p: price, $y: year, $l: level, $p: popularity)
+        $c: List() from collect(Course(title == $t, price == $p))
+    then
+
+end

@@ -2,6 +2,7 @@ import React from "react";
 import CourseListing from "../components/courses/courseListing";
 import CourseSearchPane from "../components/courses/courseSearchPane";
 import SubscriberLayout from "../layouts/subscriberLayout";
+import axios from "axios";
 
 class UserHome extends React.Component {
     constructor(props) {
@@ -12,40 +13,47 @@ class UserHome extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            courses : [
-                {
-                    courseId : '123',
-                    name : 'AI Basics',
-                    price : '1230'
-                },
-                {
-                    courseId : '124',
-                    name : 'AI Advanced',
-                    price : '1235'
-                },
-                {
-                    courseId : '124',
-                    name : 'AI Advanced',
-                    price : '1235'
-                },
-                {
-                    courseId : '124',
-                    name : 'AI Advanced',
-                    price : '1235'
-                },
-                {
-                    courseId : '124',
-                    name : 'AI Advanced',
-                    price : '1235'
-                },
-                {
-                    courseId : '124',
-                    name : 'AI Advanced',
-                    price : '1235'
-                }
-            ]
-        })
+        axios
+            .get('http://localhost:8080/courses')
+            .then(res => {
+                this.setState({
+                    courses : res.data
+                })
+            })
+        // this.setState({
+        //     courses : [
+        //         {
+        //             courseId : '123',
+        //             name : 'AI Basics',
+        //             price : '1230'
+        //         },
+        //         {
+        //             courseId : '124',
+        //             name : 'AI Advanced',
+        //             price : '1235'
+        //         },
+        //         {
+        //             courseId : '124',
+        //             name : 'AI Advanced',
+        //             price : '1235'
+        //         },
+        //         {
+        //             courseId : '124',
+        //             name : 'AI Advanced',
+        //             price : '1235'
+        //         },
+        //         {
+        //             courseId : '124',
+        //             name : 'AI Advanced',
+        //             price : '1235'
+        //         },
+        //         {
+        //             courseId : '124',
+        //             name : 'AI Advanced',
+        //             price : '1235'
+        //         }
+        //     ]
+        // })
     }
 
     render() {
