@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="drools-spring-app" />
+        <module name="drools-spring-kjar" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="drools-spring-app" target="1.8" />
+      <module name="drools-spring-kjar" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

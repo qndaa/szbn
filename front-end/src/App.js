@@ -2,12 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import UserHome from "./pages/userHome";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
 
 function App() {
   return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={UserHome}/>
+            <Route exact path="/" component={UserHome}/>
+            <Route exact path={`/registration`} component={Registration} />
+            <Route exact path={`/login`} component={Login} />
         </Switch>
       </BrowserRouter>
     /*<div className="App">

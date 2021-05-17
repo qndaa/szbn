@@ -39,6 +39,12 @@ public class Course {
     @Column(name = "price", nullable = false)
     private double price;
 
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @OneToMany
     private Set<Mark> marks = new HashSet<>();
 
