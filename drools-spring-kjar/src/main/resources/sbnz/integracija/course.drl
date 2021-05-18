@@ -1,0 +1,16 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Subscriber;
+
+global String id;
+
+rule "Precondition courses"
+    when
+        $s: Subscriber($completed: completedCourses)
+        $c: Course(courseId == id, $preconditions: preconditions)
+        Course($completed contains this) from $preconditions
+    then
+
+    modify($s){subscribeOnCourse($c)}
+end

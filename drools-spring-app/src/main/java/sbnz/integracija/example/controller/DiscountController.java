@@ -10,6 +10,7 @@ import sbnz.integracija.example.service.DiscountService;
 
 @RestController
 public class DiscountController {
+
     @Autowired
     DiscountService discountService;
 
