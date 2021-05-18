@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import sbnz.integracija.example.enums.LevelOfCourse;
+import sbnz.integracija.example.enums.PopularityCategory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,7 +32,7 @@ public class Course {
     @JoinTable(name = "COURSE_AREA",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "area_id", referencedColumnName = "area_id"))
-    private Set<Area> courseAres = new HashSet<>();
+    private Set<Area> courseAreas = new HashSet<>();
 
     @Column(name = "duration", nullable = false)
     private double duration;
@@ -73,4 +74,8 @@ public class Course {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Teacher teacher;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column
+    private PopularityCategory popularity;
 }

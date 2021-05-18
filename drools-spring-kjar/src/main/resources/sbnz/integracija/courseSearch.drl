@@ -1,0 +1,10 @@
+//import sbnz.integracija.example.facts.Course;
+//import sbnz.integracija.example.dto.CourseSearchDTO;
+//
+rule "course sarch"
+    when
+        CourseSearchDTO($t: title, $a: area, $au: author, $g: grade, $p: price, $y: year, $l: level, $p: popularity)
+        $c: List() from collect(Course(title == $t, price == $p, grade == $g, level == $l, popularity == $p))
+    then
+
+end

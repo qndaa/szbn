@@ -45,4 +45,5 @@ public class Subscriber extends User{
     public void subscribeOnCourse(Course c) {
         subscribedCourses.add(c);
     }
+
 }
