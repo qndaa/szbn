@@ -1,0 +1,13 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.enums.CategoryOfUser;
+import sbnz.integracija.example.facts.Subscriber;
+
+
+rule "Set Basic category"
+    when
+        $s: Subscriber(categoryOfUser == CategoryOfUser.NO_CATEGORY)
+    then
+        System.out.println("Set a basic category!");
+        modify($s){setCategoryOfUser(CategoryOfUser.BASIC)}
+end

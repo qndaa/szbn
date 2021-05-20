@@ -1,9 +1,32 @@
+package sbnz.integracija;
+
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.enums.PopularityCategory;
+import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Subscriber;
+
+
 import java.util.List;
 
-rule "not popular course -> less than 4 subsribers"
+global String id;
+
+rule "Precondition courses"
+    when
+        $s: Subscriber($completed: completedCourses)
+        $c: Course(courseId == id, $preconditions: preconditions)
+        Course($completed contains this) from $preconditions
+    then
+
+    modify($s){subscribeOnCourse($c)}
+//import sbnz.integracija.example.facts.Course;
+//import sbnz.integracija.example.facts.Subscriber;
+
+//
+end
+
+
+rule "not popular course -> less than 5 subsribers"
     no-loop
     when
         $course: Course($c: title)

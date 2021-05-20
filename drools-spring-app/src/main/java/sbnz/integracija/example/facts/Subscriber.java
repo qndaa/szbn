@@ -24,10 +24,26 @@ public class Subscriber extends User{
             inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"))
     private Set<Course> subscribedCourses = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "SUBSCRIBER_COMPLETED_COURSES",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"))
+    private Set<Course> completedCourses = new HashSet<>();
+
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "category")
     private CategoryOfUser categoryOfUser;
 
     @Column(name="discount")
     private Double discount;
+
+    public void incrementDiscount(double d) {
+        this.discount += d;
+    }
+
+    public void subscribeOnCourse(Course c) {
+        subscribedCourses.add(c);
+    }
+
 }

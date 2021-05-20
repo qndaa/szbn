@@ -1,3 +1,44 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.enums.CategoryOfUser;
+import sbnz.integracija.example.facts.Subscriber;
+
+
+rule "Basic Users - 0%"
+    agenda-group "category-discount"
+    salience 100
+    when
+        $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
+    then
+        System.out.println("Discount for Basic user!");
+        modify($s){setDiscount(0.0)}
+end
+
+
+rule "Silver Users - 10%"
+    agenda-group "category-discount"
+    salience 100
+    when
+        $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
+    then
+        System.out.println("Discount for Silver user!");
+        modify($s){setDiscount(10.0)};
+end
+
+
+
+rule "Gold Users - 20%"
+    agenda-group "category-discount"
+    salience 100
+    when
+        $s: Subscriber(categoryOfUser == CategoryOfUser.GOLD)
+    then
+        System.out.println("Discount for Gold user!");
+        modify($s){setDiscount(20.0)}
+end
+
+
+
 //package sbnz.integracija;
 //
 //import sbnz.integracija.example.enums.CategoryOfUser;
