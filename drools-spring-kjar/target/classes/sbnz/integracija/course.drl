@@ -8,7 +8,6 @@ rule "not popular course -> less than 4 subsribers"
     when
         $course: Course($c: title)
         Number(intValue < 4) from accumulate(
-//            $s: Subscriber($cs: subscribedCourses) and Course(title == $c) from $cs,
             $s: Subscriber(subscribedCourses contains $course),
             count($s)
         )
@@ -22,8 +21,8 @@ rule "popular course -> between 4 and 6 subsribers"
     when
         $course: Course($c: title)
         Number(intValue >= 4, intValue < 6) from accumulate(
-//            $s: Subscriber($cs: subscribedCourses) and Course(title == $c) from $cs,
-            $s: Subscriber(subscribedCourses contains $course),            count($s)
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
         )
     then
         $course.setPopularity(PopularityCategory.POPULAR);
@@ -35,8 +34,8 @@ rule "highly popular course -> between 6 and 8 subsribers"
     when
         $course: Course($c: title)
         Number(intValue >= 6, intValue < 8) from accumulate(
-//            $s: Subscriber($cs: subscribedCourses) and Course(title == $c) from $cs,
-            $s: Subscriber(subscribedCourses contains $course),            count($s)
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
         )
     then
         $course.setPopularity(PopularityCategory.HIGHLY_POPULAR);
@@ -48,8 +47,8 @@ rule "extremely -> more that 8 subsribers"
     when
         $course: Course($c: title)
         Number(intValue >= 8) from accumulate(
-//            $s: Subscriber($cs: subscribedCourses) and Course(title == $c) from $cs,
-            $s: Subscriber(subscribedCourses contains $course),            count($s)
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
         )
     then
         $course.setPopularity(PopularityCategory.EXTREMELY_POPULAR);
