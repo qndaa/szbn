@@ -26,9 +26,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Collection<Course> getAll() {
         Collection<Course> courses = courseRepository.findAll();
-//        courses.forEach(c -> kieSession.insert(c));
-//        subscriberRepository.findAll().forEach(s -> kieSession.insert(s));
-//        kieSession.fireAllRules();
+        courses.forEach(c -> kieSession.insert(c));
+        subscriberRepository.findAll().forEach(s -> kieSession.insert(s));
+        kieSession.fireAllRules();
         return courses;
     }
 }
