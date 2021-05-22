@@ -6,6 +6,7 @@ import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.events.CourseEnrollmentEvent;
+import sbnz.integracija.example.events.CourseSearchEvent;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
@@ -42,6 +43,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Collection<Course> search(CourseSearchDTO searchDTO) {
         Collection<Course> courses = new ArrayList<>();
+        CourseSearchEvent searchEvent = new CourseSearchEvent(searchDTO.getUserId());
+        kieSession.insert(searchEvent);
         courseRepository.findAll().forEach(c -> kieSession.insert(c));
         QueryResults results = kieSession.getQueryResults(
                 "courseSearch", searchDTO.getTitle(), searchDTO.getArea(), searchDTO.getAuthor(), searchDTO.getGrade(),

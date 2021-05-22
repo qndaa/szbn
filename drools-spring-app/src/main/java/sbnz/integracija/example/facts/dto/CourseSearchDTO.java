@@ -9,11 +9,13 @@ import sbnz.integracija.example.enums.PopularityCategory;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @NoArgsConstructor
 @Getter
 @Setter
 public class CourseSearchDTO {
+    private UUID userId;
     private String title;
     private String area;
     private String author;

@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
+import org.kie.api.definition.type.Timestamp;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Role(Role.Type.EVENT)
+@Timestamp("timestamp")
 @Getter
 @Setter
 @NoArgsConstructor

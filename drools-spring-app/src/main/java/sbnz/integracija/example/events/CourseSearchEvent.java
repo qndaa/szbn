@@ -3,27 +3,23 @@ package sbnz.integracija.example.events;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.kie.api.definition.type.Expires;
 import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Role(Role.Type.EVENT)
-@Expires("1h")
 @Timestamp("timestamp")
 @Getter
 @Setter
 @NoArgsConstructor
-public class CourseEnrollmentEvent {
+public class CourseSearchEvent {
     private UUID userId;
-    private UUID courseId;
-    private LocalDateTime timestamp;
+    private Date timestamp;
 
-    public CourseEnrollmentEvent(UUID userId, UUID courseId) {
+    public CourseSearchEvent(UUID userId) {
         this.userId = userId;
-        this.courseId = courseId;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = new Date();
     }
 }
