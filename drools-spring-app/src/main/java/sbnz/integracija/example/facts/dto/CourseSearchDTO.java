@@ -1,11 +1,13 @@
 package sbnz.integracija.example.facts.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sbnz.integracija.example.enums.LevelOfCourse;
 import sbnz.integracija.example.enums.PopularityCategory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class CourseSearchDTO {
     private String author;
     private int grade;
     private double price;
-    private LocalDateTime year;
+    private LocalDate year;
     private LevelOfCourse level;
     private PopularityCategory popularity;
 }

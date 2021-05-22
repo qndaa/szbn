@@ -1,5 +1,17 @@
-//import sbnz.integracija.example.facts.Course;
-//import sbnz.integracija.example.dto.CourseSearchDTO;
+import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Area;
+import sbnz.integracija.example.facts.dto.CourseSearchDTO;
+import java.time.LocalDate;
+import sbnz.integracija.example.enums.PopularityCategory;
+import sbnz.integracija.example.enums.LevelOfCourse;
+
+query courseSearch(String _title, String _area, String _author, int _grade, double _price, LocalDate _year, LevelOfCourse _level, PopularityCategory _popularity)
+//    $c: Course(title == _title)
+    $c: Course($areas: courseAreas, price == _price, title == _title, levelOfCourse == _level, $teacher: teacher)
+    and Area(name == _area) from $areas
+end
+
+
 //
 //rule "course sarch"
 //    when

@@ -1,13 +1,17 @@
 package sbnz.integracija.example.service.impl;
 
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.repository.CourseRepository;
 import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.CourseService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
@@ -29,6 +33,17 @@ public class CourseServiceImpl implements CourseService {
         courses.forEach(c -> kieSession.insert(c));
         subscriberRepository.findAll().forEach(s -> kieSession.insert(s));
         kieSession.fireAllRules();
+        return courses;
+    }
+
+    @Override
+    public Collection<Course> search(CourseSearchDTO searchDTO) {
+        Collection<Course> courses = new ArrayList<>();
+        courseRepository.findAll().forEach(c -> kieSession.insert(c));
+        QueryResults results = kieSession.getQueryResults(
+                "courseSearch", searchDTO.getTitle(), searchDTO.getArea(), searchDTO.getAuthor(), searchDTO.getGrade(),
+                searchDTO.getPrice(), searchDTO.getYear(), searchDTO.getLevel(), searchDTO.getPopularity());
+        for(QueryResultsRow row : results) courses.add((Course) row.get("$c"));
         return courses;
     }
 }
