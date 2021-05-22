@@ -38,6 +38,9 @@ public class Subscriber extends User{
     @Column(name="discount")
     private Double discount;
 
+    @Column
+    private boolean blocked;
+
     public void incrementDiscount(double d) {
         this.discount += d;
     }

@@ -5,7 +5,9 @@ import org.kie.api.runtime.rule.QueryResults;
 import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbnz.integracija.example.events.CourseEnrollmentEvent;
 import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.repository.CourseRepository;
 import sbnz.integracija.example.repository.SubscriberRepository;
@@ -13,6 +15,7 @@ import sbnz.integracija.example.service.CourseService;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -45,5 +48,20 @@ public class CourseServiceImpl implements CourseService {
                 searchDTO.getPrice(), searchDTO.getYear(), searchDTO.getLevel(), searchDTO.getPopularity());
         for(QueryResultsRow row : results) courses.add((Course) row.get("$c"));
         return courses;
+    }
+
+    @Override
+    public void enroll(UUID userId, UUID courseId) {
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        if(subscriber.isBlocked())
+            throw new IllegalStateException("Blocked user cannot enroll in courses!");
+        CourseEnrollmentEvent enrollment = new CourseEnrollmentEvent(userId, courseId);
+        kieSession.insert(enrollment);
+        kieSession.insert(subscriber);
+//        kieSession.getAgenda().getAgendaGroup("malware").setFocus();
+        kieSession.fireAllRules();
+        subscriberRepository.save(subscriber);
+//        kieSession.getAgenda().getAgendaGroup("MAIN").setFocus();
+
     }
 }

@@ -9,6 +9,7 @@ import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.service.CourseService;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/courses")
@@ -28,5 +29,15 @@ public class CourseController {
     @PostMapping(value = "/search")
     public ResponseEntity<Collection<Course>> search(@RequestBody CourseSearchDTO searchDTO) {
         return new ResponseEntity<>(courseService.search(searchDTO), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/enroll")
+    public ResponseEntity<Void> enroll(@RequestParam UUID userId, @RequestParam UUID courseId) {
+        try {
+            courseService.enroll(userId, courseId);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
