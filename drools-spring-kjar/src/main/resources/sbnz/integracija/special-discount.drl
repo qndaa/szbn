@@ -14,7 +14,7 @@ rule "Special discout when subscriber has two and more completed courses in same
     when
         $s: Subscriber($courses : completedCourses)
         Number (intValue >= 2) from accumulate(
-            Course( courseAres == area, $c: this ) from $courses,
+            Course( courseAreas == area, $c: this ) from $courses,
             count($c)
         )
     then
