@@ -25,21 +25,55 @@ rule "Precondition courses"
 //
 end
 
-/*
+
 rule "not popular course -> less than 5 subsribers"
     no-loop
     when
         $course: Course($c: title)
-        $s: List() from collect(Subsrciber())
-        Number(intValue < 5) from accumulate(
-            $ss: Subscriber() from $s and
-            $cc: List() from collect(Course(title == $c) from $s.getSubscribedCourses()),
-//            Subscriber($cs: subscribedCourses) from $s and
-//            $oc: Course(title == $c) from $cs,
-            count($cc)
+        Number(intValue < 4) from accumulate(
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
         )
     then
         $course.setPopularity(PopularityCategory.NOT_POPULAR);
         update($course)
 end
-*/
+
+rule "popular course -> between 4 and 6 subsribers"
+    no-loop
+    when
+        $course: Course($c: title)
+        Number(intValue >= 4, intValue < 6) from accumulate(
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
+        )
+    then
+        $course.setPopularity(PopularityCategory.POPULAR);
+        update($course)
+end
+
+rule "highly popular course -> between 6 and 8 subsribers"
+    no-loop
+    when
+        $course: Course($c: title)
+        Number(intValue >= 6, intValue < 8) from accumulate(
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
+        )
+    then
+        $course.setPopularity(PopularityCategory.HIGHLY_POPULAR);
+        update($course)
+end
+
+rule "extremely -> more that 8 subsribers"
+    no-loop
+    when
+        $course: Course($c: title)
+        Number(intValue >= 8) from accumulate(
+            $s: Subscriber(subscribedCourses contains $course),
+            count($s)
+        )
+    then
+        $course.setPopularity(PopularityCategory.EXTREMELY_POPULAR);
+        update($course)
+end

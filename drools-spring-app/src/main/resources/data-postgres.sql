@@ -25,13 +25,23 @@ INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VAL
 
 INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('e71ab9bc-b698-11eb-8529-0242ac130003', 'Djura', 'Djuric', 'djura@gmail.com', 'djura1234', 2);
 INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130003', 'Stefan', 'Stefanovic', 'stefan@gmail.com', 'stefan1234', 2);
+INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130004', 'Stefan', 'Stefanovic', 'stefan3@gmail.com', 'stefan1234', 2);
+INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130005', 'Stefan', 'Stefanovic', 'stefan4@gmail.com', 'stefan1234', 2);
+INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130006', 'Stefan', 'Stefanovic', 'stefan5@gmail.com', 'stefan1234', 2);
+INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130007', 'Stefan', 'Stefanovic', 'stefan6@gmail.com', 'stefan1234', 2);
+INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130008', 'Stefan', 'Stefanovic', 'stefan7@gmail.com', 'stefan1234', 2);
 
 
 INSERT INTO TEACHERS(user_id) VALUES('dfc9bc30-b698-11eb-8529-0242ac130003');
 INSERT INTO TEACHERS(user_id) VALUES('e39930d4-b698-11eb-8529-0242ac130003');
 
-INSERT INTO SUBSCRIBERS(user_id) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003');
-INSERT INTO SUBSCRIBERS(user_id) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130004', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130005', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130006', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130007', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130008', false);
 
 
 
@@ -58,3 +68,8 @@ INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('e71ab9bc-b698-11e
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('e71ab9bc-b698-11eb-8529-0242ac130003', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130003', '525ce06e-b69f-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130003', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130004', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130005', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130006', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130007', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130008', '8f2eaabc-b6a0-11eb-8529-0242ac130003');

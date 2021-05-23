@@ -36,7 +36,10 @@ public class Subscriber extends User{
     private CategoryOfUser categoryOfUser;
 
     @Column(name="discount")
-    private double discount;
+    private Double discount;
+
+    @Column
+    private boolean blocked;
 
     public void incrementDiscount(double d) {
         this.discount += d;
