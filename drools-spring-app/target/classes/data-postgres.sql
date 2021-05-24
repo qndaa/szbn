@@ -35,13 +35,13 @@ INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VAL
 INSERT INTO TEACHERS(user_id) VALUES('dfc9bc30-b698-11eb-8529-0242ac130003');
 INSERT INTO TEACHERS(user_id) VALUES('e39930d4-b698-11eb-8529-0242ac130003');
 
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130004', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130005', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130006', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130007', false);
-INSERT INTO SUBSCRIBERS(user_id, blocked) VALUES('ed5de8c6-b698-11eb-8529-0242ac130008', false);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003', false, '2021-02-26');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003', false, '2021-06-11');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130004', false, '2020-01-01');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130005', false, '2020-04-21');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130006', false, '2020-02-20');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130007', false, '2020-01-20');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130008', false, '2021-02-25');
 
 
 

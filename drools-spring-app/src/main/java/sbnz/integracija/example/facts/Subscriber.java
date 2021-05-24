@@ -7,6 +7,7 @@ import lombok.Setter;
 import sbnz.integracija.example.enums.CategoryOfUser;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +39,9 @@ public class Subscriber extends User{
     @Column(name="discount")
     private Double discount;
 
+    @Column(name = "dateOfRegistration")
+    private LocalDateTime dateOfRegistration;
+
     @Column
     private boolean blocked;
 
@@ -49,4 +53,9 @@ public class Subscriber extends User{
         subscribedCourses.add(c);
     }
 
+    public LocalDateTime getDate(int m) {
+        LocalDateTime l = LocalDateTime.now();
+        l.minusMonths(m);
+        return l;
+    }
 }

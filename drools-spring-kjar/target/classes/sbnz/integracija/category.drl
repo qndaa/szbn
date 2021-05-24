@@ -2,12 +2,38 @@ package sbnz.integracija;
 
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.facts.Subscriber;
+import java.time.LocalDateTime;
+
 
 
 rule "Set Basic category"
+    agenda-group "set-category"
     when
         $s: Subscriber(categoryOfUser == CategoryOfUser.NO_CATEGORY)
     then
         System.out.println("Set a basic category!");
         modify($s){setCategoryOfUser(CategoryOfUser.BASIC)}
+end
+
+rule "Set silver category"
+    agenda-group "set-category"
+    when
+        $s: Subscriber()
+
+
+    then
+        System.out.println("Set a silver category!");
+
+
+end
+
+
+rule "Set gold category"
+    agenda-group "set-category"
+    when
+        $s: Subscriber(dateOfRegistration < LocalDateTime.now().minusMonths(6))
+    then
+        System.out.println("Set a gold category!");
+
+
 end
