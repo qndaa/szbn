@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 rule "Set Basic category"
     agenda-group "set-category"
+    no-loop
     when
         $s: Subscriber(categoryOfUser == CategoryOfUser.NO_CATEGORY)
     then
@@ -18,6 +19,7 @@ end
 
 rule "Set silver category"
     agenda-group "set-category"
+    no-loop
     when
         $s: Subscriber(dateOfRegistration < getDate(6), $coures: completedCourses)
         Number(intValue > 50 ) from accumulate(
@@ -37,6 +39,7 @@ end
 
 rule "Set gold category"
     agenda-group "set-category"
+    no-loop
     when
         $s: Subscriber(dateOfRegistration < getDate(12), $coures: completedCourses)
         Number(intValue > 100 ) from accumulate(

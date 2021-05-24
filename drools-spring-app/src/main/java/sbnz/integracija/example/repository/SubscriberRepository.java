@@ -6,4 +6,5 @@ import sbnz.integracija.example.facts.Subscriber;
 import java.util.UUID;
 
 public interface SubscriberRepository extends JpaRepository<Subscriber, UUID> {
+    Subscriber findByUsername(String username);
 }

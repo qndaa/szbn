@@ -20,8 +20,14 @@ public class SubscriberController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<Subscriber> registrationSubscriber(@RequestBody Subscriber subscriber) {
-        return new ResponseEntity<>( HttpStatus.OK);
+    public ResponseEntity<Subscriber> registrationSubscriber(@RequestBody Subscriber subscriberRequest) {
+        Subscriber subscriber = null;
+        try {
+            subscriber = subscriberService.save(subscriberRequest);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Subscriber>(subscriber, HttpStatus.OK);
     }
 
 

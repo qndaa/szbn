@@ -2,12 +2,14 @@ package sbnz.integracija;
 
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.facts.Subscriber;
+import sbnz.integracija.example.facts.Course;
 import java.time.LocalDateTime;
 
 
 
 rule "Set Basic category"
     agenda-group "set-category"
+    no-loop
     when
         $s: Subscriber(categoryOfUser == CategoryOfUser.NO_CATEGORY)
     then
@@ -17,23 +19,38 @@ end
 
 rule "Set silver category"
     agenda-group "set-category"
+    no-loop
     when
-        $s: Subscriber()
-
+        $s: Subscriber(dateOfRegistration < getDate(6), $coures: completedCourses)
+        Number(intValue > 50 ) from accumulate(
+            Course( $h: getDuration()) from $coures,
+            sum($h)
+        )
+        Number(intValue > 200) from accumulate(
+            Course( $p: price) from $coures,
+            sum($p)
+        )
 
     then
         System.out.println("Set a silver category!");
-
-
+        modify($s){setCategoryOfUser(CategoryOfUser.SILVER)}
 end
 
 
 rule "Set gold category"
     agenda-group "set-category"
+    no-loop
     when
-        $s: Subscriber(dateOfRegistration < LocalDateTime.now().minusMonths(6))
+        $s: Subscriber(dateOfRegistration < getDate(12), $coures: completedCourses)
+        Number(intValue > 100 ) from accumulate(
+                    Course( $h: getDuration()) from $coures,
+                    sum($h)
+                )
+                Number(intValue > 500) from accumulate(
+                    Course( $p: price) from $coures,
+                    sum($p)
+                )
     then
         System.out.println("Set a gold category!");
-
-
+        modify($s){setCategoryOfUser(CategoryOfUser.GOLD)}
 end

@@ -6,4 +6,5 @@ import sbnz.integracija.example.facts.User;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
+
 }
