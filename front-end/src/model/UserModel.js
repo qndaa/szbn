@@ -4,13 +4,9 @@ class UserModel {
     constructor() {
         this.name = '';
         this.surname = '';
-        this.email = '';
+        this.username = '';
         this.password = '';
         this.confirmPassword = '';
-    }
-
-    isValidName = () => {
-
     }
 
 }

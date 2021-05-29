@@ -1,6 +1,8 @@
 import React from "react";
 import UserModel from "../model/UserModel"
 import UserModelValidation from "../model/UserModelValidation";
+import axios from "axios";
+import apiUrl from '../api/ApiUrl'
 
 class Registration extends React.Component {
 
@@ -21,7 +23,7 @@ class Registration extends React.Component {
     }
 
     onChangeEmailInput = (event) => {
-        this.setState({user : {...(this.state.user), email: event.target.value} });
+        this.setState({user : {...(this.state.user), username: event.target.value} });
         this.setState({userValidation: new UserModelValidation()});
     }
 
@@ -41,16 +43,21 @@ class Registration extends React.Component {
         event.preventDefault();
 
         if (await this.isFormValid()) {
-            alert("form valid");
-        }
 
-        console.log(this.state.user);
+            const response = await apiUrl.post('/users/registration', this.state.user);
+            if (response.status === 200) {
+                this.setState({user: new UserModel(), userValidation: new UserModelValidation()});
+                alert('Registration success!');
+            } else {
+                alert("Wrong data!");
+            }
+        }
     }
 
     isFormValid = async () => {
         const validName = await this.isValidName(this.state.user.name);
         const validSurname = await this.isValidSurname(this.state.user.surname);
-        const validEmail = await this.isValidEmail(this.state.user.email);
+        const validEmail = await this.isValidEmail(this.state.user.username);
         const validPassword = await this.isValidPassword(this.state.user.password);
         const validConfirmPassword = await this.isValidPassword(this.state.user.confirmPassword);
         return validName && validSurname && validEmail && validPassword && validConfirmPassword;
@@ -77,7 +84,7 @@ class Registration extends React.Component {
     }
 
     isValidEmail = (email) => {
-        if (email.match(new RegExp('.+(@).+(.com)'))) {
+        if (email.length > 4) {
             this.setState({userValidation : {...this.state.userValidation, validEmail: 'is-valid'}});
             return true;
         } else {
@@ -135,10 +142,10 @@ class Registration extends React.Component {
 
                         <div className={`row mt-3`}>
                             <div className={`col-4`}>
-                                <label htmlFor="email" className="text-dark">Email:</label>
-                                <input type="text" id="email" className={`form-control ` + this.state.userValidation.validEmail} onChange={this.onChangeEmailInput} value={this.state.user.email}/>
+                                <label htmlFor="email" className="text-dark">Username:</label>
+                                <input type="text" id="email" className={`form-control ` + this.state.userValidation.validEmail} onChange={this.onChangeEmailInput} value={this.state.user.username}/>
                                 <div className="invalid-feedback">
-                                    Wrong email!
+                                    Wrong username!
                                 </div>
 
                             </div>
