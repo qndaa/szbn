@@ -37,6 +37,7 @@ public class CourseServiceImpl implements CourseService {
         courses.forEach(c -> kieSession.insert(c));
         subscriberRepository.findAll().forEach(s -> kieSession.insert(s));
         kieSession.fireAllRules();
+        courses.forEach(c -> courseRepository.save(c));
         return courses;
     }
 

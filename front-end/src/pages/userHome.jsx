@@ -59,10 +59,16 @@ class UserHome extends React.Component {
     render() {
         return (
             <SubscriberLayout>
-                <CourseSearchPane/>
+                <CourseSearchPane update={this.updateCourses}/>
                 <CourseListing courses={this.state.courses}/>
             </SubscriberLayout>
         )
+    }
+
+    updateCourses = (courses) => {
+        this.setState({
+            courses : courses
+        })
     }
 }
 

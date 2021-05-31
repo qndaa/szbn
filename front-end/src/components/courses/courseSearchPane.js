@@ -1,19 +1,20 @@
 import React from "react";
 import {Button, Col, Form} from "react-bootstrap";
 import RangeSlider from 'react-bootstrap-range-slider'
+import axios from "axios";
 
 class CourseSearchPane extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             show : false,
-            title : '',
-            area : '',
-            author : '',
-            duration : '',
-            price : 0,
-            grade : 1,
-            year : '',
+            title : null,
+            area : null,
+            author : null,
+            duration : null,
+            price : null,
+            grade : null,
+            year : null,
             popularity : 'Choose...',
             level : 'Choose...'
         }
@@ -95,7 +96,7 @@ class CourseSearchPane extends React.Component {
                 </Form.Row>
 
 
-                <Button className={'mt-2 mb-3'} variant="primary" type="submit">
+                <Button className={'mt-2 mb-3'} variant="primary" onClick={this.search}>
                     Submit
                 </Button>
                 <Button className={'mt-2 mb-3 ml-2'} variant="secondary" onClick={() => this.setState({show: false})}>
@@ -112,6 +113,36 @@ class CourseSearchPane extends React.Component {
         const value = e.target.value
         this.setState({
             [name] : value
+        })
+    }
+
+    search = () => {
+        axios
+            .post('http://localhost:8080/courses/search', {
+                'title' : this.state.title,
+                'area' : this.state.area,
+                'author': this.state.author,
+                'grade' : this.state.grade,
+                'price' : this.state.price,
+                'year' : this.state.year,
+                'level' : this.state.level === 'Choose...' ? null : this.state.level.toUpperCase(),
+                'popularity' : this.state.popularity === 'Choose...' ? null : this.state.popularity
+            })
+            .then(res => {
+                this.props.update(res.data)
+            })
+    }
+
+    handleExpand = () => {
+        this.setState({
+            title : null,
+            area : null,
+            author: null,
+            grade : null,
+            price : null,
+            year : null,
+            level : 'Choose...',
+            popularity : 'Choose...'
         })
     }
     
