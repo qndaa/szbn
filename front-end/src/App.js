@@ -4,16 +4,35 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import UserHome from "./pages/userHome";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
+import React from "react";
 
-function App() {
-  return (
-      <BrowserRouter>
-        <Switch>
-            <Route exact path="/courses" component={UserHome}/>
-            <Route exact path={`/registration`} component={Registration} />
-            <Route exact path={`/login`} component={Login} />
-        </Switch>
-      </BrowserRouter>
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        if (localStorage.getItem("id") == null) {
+            localStorage.setItem("id", null);
+            localStorage.setItem("role", null);
+        }
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path={`/`} component={UserHome}/>
+                    <Route exact path="/courses" component={UserHome}/>
+                    <Route exact path={`/registration`} component={Registration} />
+                    <Route exact path={`/login`} component={Login} />
+                </Switch>
+            </BrowserRouter>
+        )
+
+    }
+
+
+
+
     /*<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -30,7 +49,7 @@ function App() {
         </a>
       </header>
     </div>*/
-  );
+  ;
 }
 
 export default App;

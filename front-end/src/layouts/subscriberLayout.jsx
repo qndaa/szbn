@@ -2,6 +2,12 @@ import React from "react";
 import {Container, Nav, Navbar, NavLink, Row} from "react-bootstrap";
 
 class SubscriberLayout extends React.Component {
+
+    logout = () => {
+        localStorage.setItem("id", null);
+        localStorage.setItem("role", null);
+    }
+
     render() {
         return(
             <Container fluid className={'p-0'}>
@@ -15,7 +21,7 @@ class SubscriberLayout extends React.Component {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
                         <Nav>
-                            <Nav.Link>Log out</Nav.Link>
+                            <Nav.Link href={`/login`} ><button onClick={this.logout} className={`btn btn-primary`}>Log out</button></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

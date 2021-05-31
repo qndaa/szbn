@@ -41,7 +41,6 @@ class Registration extends React.Component {
 
     onSubmitClick = async (event) => {
         event.preventDefault();
-
         if (await this.isFormValid()) {
 
             const response = await apiUrl.post('/users/registration', this.state.user);
