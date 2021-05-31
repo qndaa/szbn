@@ -112,6 +112,10 @@ class Registration extends React.Component {
         }
     }
 
+    goOnLoginClick = () => {
+        this.props.history.push('/login');
+    }
+
 
     render() {
         return (
@@ -169,6 +173,7 @@ class Registration extends React.Component {
 
                         <div className={`row mt-5`}>
                             <button className={`btn btn-dark ml-3 mr-3 w-100`} onClick={this.onSubmitClick}>Submit</button>
+                            <button className={`btn btn-dark ml-3 mr-3 w-100 mt-3`} onClick={this.goOnLoginClick}>Go on Login</button>
                         </div>
 
                     </form>

@@ -13,6 +13,12 @@ class UserHome extends React.Component {
     }
 
     componentDidMount() {
+
+        if (localStorage.getItem("id") === "null") {
+            this.props.history.push('/login');
+        }
+
+
         axios
             .get('http://localhost:8080/courses')
             .then(res => {
