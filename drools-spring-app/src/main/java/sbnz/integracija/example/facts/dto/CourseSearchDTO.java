@@ -19,8 +19,8 @@ public class CourseSearchDTO {
     private String title;
     private String area;
     private String author;
-    private int grade;
-    private double price;
+    private Integer grade;
+    private Double price;
     private LocalDate year;
     private LevelOfCourse level;
     private PopularityCategory popularity;
