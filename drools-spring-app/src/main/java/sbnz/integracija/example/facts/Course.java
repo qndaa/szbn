@@ -29,7 +29,7 @@ public class Course {
     @Column(name = "course_id", nullable = false, unique = true)
     private UUID courseId;
 
-//    @Position(0)
+    @Position(0)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "COURSE_AREA",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
@@ -39,11 +39,11 @@ public class Course {
     @Column(name = "duration", nullable = false)
     private double duration;
 
-//    @Position(1)
+    @Position(1)
     @Column(name = "price", nullable = false)
     private double price;
 
-//    @Position(2)
+    @Position(2)
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -53,11 +53,11 @@ public class Course {
     @OneToMany
     private Set<Mark> marks = new HashSet<>();
 
-//    @Position(3)
+    @Position(3)
     @Column(name = "year", nullable = false)
     private LocalDateTime year;
 
-//    @Position(4)
+    @Position(4)
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "level", nullable = false)
     private LevelOfCourse levelOfCourse;
@@ -76,13 +76,13 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "skill_id"))
     private Set<Skill> skills = new HashSet<>();
 
-//    @Position(5)
+    @Position(5)
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Teacher teacher;
 
-//    @Position(6)
+    @Position(6)
     @Enumerated(EnumType.ORDINAL)
     @Column
     private PopularityCategory popularity;

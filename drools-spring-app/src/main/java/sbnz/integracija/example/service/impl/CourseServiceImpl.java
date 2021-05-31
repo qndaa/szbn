@@ -42,7 +42,6 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Collection<Course> search(CourseSearchDTO searchDTO) {
-        /*
         Collection<Course> courses = new ArrayList<>();
         CourseSearchEvent searchEvent = new CourseSearchEvent(searchDTO.getUserId());
         kieSession.insert(searchEvent);
@@ -52,8 +51,7 @@ public class CourseServiceImpl implements CourseService {
                 searchDTO.getPrice(), searchDTO.getYear(), searchDTO.getLevel(), searchDTO.getPopularity());
         for(QueryResultsRow row : results) courses.add((Course) row.get("$c"));
         return courses;
-        */
-        return null;
+//        return null;
     }
 
     @Override
