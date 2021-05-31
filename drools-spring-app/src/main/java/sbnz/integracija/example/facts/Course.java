@@ -86,4 +86,11 @@ public class Course {
     @Enumerated(EnumType.ORDINAL)
     @Column
     private PopularityCategory popularity;
+
+
+    @Column(name = "discountByEnrollment")
+    private double discountByEnrollment;
+
+    @Column(name = "discountByReview")
+    private double discountByReview;
 }
