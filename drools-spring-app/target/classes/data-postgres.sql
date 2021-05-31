@@ -45,9 +45,9 @@ INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6
 
 
 
-INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id) VALUES ('525ce06e-b69f-11eb-8529-0242ac130003', 'Introduction to Python', 'Basic knowledge in Python!', 90, 149, '2019-01-20', 0, 'dfc9bc30-b698-11eb-8529-0242ac130003' );
-INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id) VALUES ('8f2eaabc-b6a0-11eb-8529-0242ac130003', 'Introduction to Java', 'Basic knowledge in Java!', 120, 149, '2020-02-25', 0, 'e39930d4-b698-11eb-8529-0242ac130003' );
-INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id) VALUES ('959984ee-b6a0-11eb-8529-0242ac130003', 'Introduction to Algorithm', 'Learn algorithm in Python language!', 200, 149, '2021-01-25', 1, 'dfc9bc30-b698-11eb-8529-0242ac130003' );
+INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('525ce06e-b69f-11eb-8529-0242ac130003', 'Introduction to Python', 'Basic knowledge in Python!', 90, 149, '2019-01-20', 0, 'dfc9bc30-b698-11eb-8529-0242ac130003', 0, 0);
+INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('8f2eaabc-b6a0-11eb-8529-0242ac130003', 'Introduction to Java', 'Basic knowledge in Java!', 120, 149, '2020-02-25', 0, 'e39930d4-b698-11eb-8529-0242ac130003', 0, 0);
+INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('959984ee-b6a0-11eb-8529-0242ac130003', 'Introduction to Algorithm', 'Learn algorithm in Python language!', 200, 149, '2021-01-25', 1, 'dfc9bc30-b698-11eb-8529-0242ac130003', 0, 0);
 
 
 INSERT INTO COURSE_AREA(course_id, area_id) VALUES ('525ce06e-b69f-11eb-8529-0242ac130003', '27a25265-97b8-49a6-8f58-4f2889211d2f');

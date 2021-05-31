@@ -1,0 +1,23 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.facts.*
+import sbnz.integracija.example.events.*
+dialect  "mvel"
+
+
+
+rule "Less than 10 enrollemet in 30 days - discount 10%"
+    when
+        $c: Course($id : courseId)
+        Number(intValue < 10) from accumulate (
+            $ce: CourseEnrollmentEvent(courseId == $id) over window:time(30d)
+            count($ce)
+        )
+    then
+
+    modify($c){setDiscountByEnrollment(10)}
+
+end
+
+
+
