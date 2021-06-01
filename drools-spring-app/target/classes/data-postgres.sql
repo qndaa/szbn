@@ -35,17 +35,17 @@ INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VAL
 INSERT INTO TEACHERS(user_id) VALUES('dfc9bc30-b698-11eb-8529-0242ac130003');
 INSERT INTO TEACHERS(user_id) VALUES('e39930d4-b698-11eb-8529-0242ac130003');
 
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003', false, '2021-02-26');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003', false, '2021-06-11');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130004', false, '2020-01-01');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130005', false, '2020-04-21');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130006', false, '2020-02-20');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130007', false, '2020-01-20');
-INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration) VALUES('ed5de8c6-b698-11eb-8529-0242ac130008', false, '2021-02-25');
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('e71ab9bc-b698-11eb-8529-0242ac130003', false, '2021-02-26', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130003', false, '2021-06-11', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130004', false, '2020-01-01', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130005', false, '2020-04-21', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130006', false, '2020-02-20', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130007', false, '2020-01-20', 3);
+INSERT INTO SUBSCRIBERS(user_id, blocked, date_of_registration, category) VALUES('ed5de8c6-b698-11eb-8529-0242ac130008', false, '2021-02-25', 3);
 
 
 
-INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('525ce06e-b69f-11eb-8529-0242ac130003', 'Introduction to Python', 'Basic knowledge in Python!', 90, 149, '2019-01-20', 0, 'dfc9bc30-b698-11eb-8529-0242ac130003', 0, 0);
+INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('525ce06e-b69f-11eb-8529-0242ac130003', 'Introduction to Python', 'Basic knowledge in Python!', 90, 250, '2021-01-20', 0, 'dfc9bc30-b698-11eb-8529-0242ac130003', 0, 0);
 INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('8f2eaabc-b6a0-11eb-8529-0242ac130003', 'Introduction to Java', 'Basic knowledge in Java!', 120, 149, '2020-02-25', 0, 'e39930d4-b698-11eb-8529-0242ac130003', 0, 0);
 INSERT INTO COURSES(course_id, title, description, duration, price, year, level, user_id, discount_by_enrollment, discount_by_review) VALUES ('959984ee-b6a0-11eb-8529-0242ac130003', 'Introduction to Algorithm', 'Learn algorithm in Python language!', 200, 149, '2021-01-25', 1, 'dfc9bc30-b698-11eb-8529-0242ac130003', 0, 0 );
 
@@ -64,6 +64,8 @@ INSERT INTO SKILL_BY_COURSE(course_id, skill_id) VALUES ('959984ee-b6a0-11eb-852
 INSERT INTO SKILL_BY_COURSE(course_id, skill_id) VALUES ('959984ee-b6a0-11eb-8529-0242ac130003', 'e421aca8-b6a1-11eb-8529-0242ac130003');
 
 
+
+
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('e71ab9bc-b698-11eb-8529-0242ac130003', '525ce06e-b69f-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('e71ab9bc-b698-11eb-8529-0242ac130003', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130003', '525ce06e-b69f-11eb-8529-0242ac130003');
@@ -73,3 +75,8 @@ INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11e
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130006', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130007', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
 INSERT INTO SUBSCRIBER_ON_COURSES(user_id, course_id) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130008', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+
+
+INSERT INTO SUBSCRIBER_COMPLETED_COURSES(user_id, course_id) VALUES  ('e71ab9bc-b698-11eb-8529-0242ac130003', '525ce06e-b69f-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_COMPLETED_COURSES(user_id, course_id) VALUES  ('e71ab9bc-b698-11eb-8529-0242ac130003', '8f2eaabc-b6a0-11eb-8529-0242ac130003');
+INSERT INTO SUBSCRIBER_COMPLETED_COURSES(user_id, course_id) VALUES  ('e71ab9bc-b698-11eb-8529-0242ac130003', '959984ee-b6a0-11eb-8529-0242ac130003');

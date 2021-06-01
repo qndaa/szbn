@@ -18,6 +18,9 @@ class SubscriberLayout extends React.Component {
                         <Nav.Link href="#features">Features</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
+
+                    <label className={`text-white mt-2 ml-5 pl-2`}>CATEGORY OF USER: {this.props.category}</label>
+
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
                         <Nav>

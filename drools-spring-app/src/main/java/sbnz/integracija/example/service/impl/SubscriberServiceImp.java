@@ -1,5 +1,7 @@
 package sbnz.integracija.example.service.impl;
 
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.SubscriberService;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class SubscriberServiceImp implements SubscriberService {
@@ -44,5 +47,24 @@ public class SubscriberServiceImp implements SubscriberService {
         System.out.println(subscriberRequest.getCategoryOfUser());
 
         return subscriberRepository.save(subscriberRequest);
+    }
+
+    @Override
+    public CategoryOfUser updateCategory(UUID id) {
+        Subscriber subscriber = subscriberRepository.findById(id).get();
+        if (subscriber != null) {
+
+
+            kieSession.insert(subscriber);
+            kieSession.getAgenda().getAgendaGroup("set-category").setFocus();
+            int firedRule = kieSession.fireAllRules();
+
+            subscriberRepository.save(subscriber);
+
+            System.out.println("Fired rules: " + firedRule);
+            System.out.println(subscriber.getCategoryOfUser());
+            return subscriber.getCategoryOfUser();
+        }
+        return null;
     }
 }

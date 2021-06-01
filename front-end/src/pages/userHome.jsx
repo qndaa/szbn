@@ -3,20 +3,29 @@ import CourseListing from "../components/courses/courseListing";
 import CourseSearchPane from "../components/courses/courseSearchPane";
 import SubscriberLayout from "../layouts/subscriberLayout";
 import axios from "axios";
+import apiUrl from "../api/ApiUrl";
 
 class UserHome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            courses : []
+            courses : [],
+            category: ''
         }
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
 
         if (localStorage.getItem("id") === "null") {
             this.props.history.push('/login');
+            return;
         }
+
+        await apiUrl.get('/users/updateCategory/' + localStorage.getItem("id"))
+            .then((response) => {
+            console.log(response);
+            this.setState({category: response.data});
+        })
 
 
         axios
@@ -64,8 +73,8 @@ class UserHome extends React.Component {
 
     render() {
         return (
-            <SubscriberLayout>
-                <CourseSearchPane update={this.updateCourses}/>
+            <SubscriberLayout category={this.state.category}>
+                <CourseSearchPane update={this.updateCourses} />
                 <CourseListing courses={this.state.courses}/>
             </SubscriberLayout>
         )
