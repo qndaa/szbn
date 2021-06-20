@@ -10,4 +10,6 @@ public interface CourseService {
     Collection<Course> getAll();
     Collection<Course> search(CourseSearchDTO searchDTO);
     void enroll(UUID userId, UUID courseId);
+
+    Collection<Course> listPrerequisites(UUID course);
 }

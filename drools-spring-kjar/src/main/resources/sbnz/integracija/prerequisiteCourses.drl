@@ -1,0 +1,22 @@
+import java.util.UUID;
+import sbnz.integracija.example.facts.PrerequisiteCourses;
+import sbnz.integracija.example.facts.Course;
+
+query isPrerequisite(UUID prerequisite, UUID course)
+    PrerequisiteCourses(prerequisite, course;)
+    or
+    ( PrerequisiteCourses($temp, course;) and isPrerequisite(prerequisite, $temp;) )
+end
+
+global UUID courseId;
+
+rule "prerequisites"
+    agenda-group "prereq"
+    lock-on-active true
+
+    when
+        $c: Course($id: courseId);
+        isPrerequisite($id, courseId;);
+    then
+        modify($c) { setPrecondition(true); }
+end

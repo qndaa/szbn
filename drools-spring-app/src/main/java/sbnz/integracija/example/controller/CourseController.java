@@ -8,6 +8,7 @@ import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.service.CourseService;
 
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -39,6 +40,11 @@ public class CourseController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/preconditions/{course}")
+    public ResponseEntity<Collection<Course>> listPrerequisites(@PathVariable String course) {
+        return new ResponseEntity<>(courseService.listPrerequisites(UUID.fromString(course)), HttpStatus.OK);
     }
 
 

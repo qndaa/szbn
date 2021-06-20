@@ -18,10 +18,8 @@ import sbnz.integracija.example.enums.PopularityCategory;
 import sbnz.integracija.example.enums.LevelOfCourse;
 
 query courseSearch(String _title, String _area, String _author, int _grade, double _price, LocalDate _year, LevelOfCourse _level, PopularityCategory _popularity)
-//    $c: Course(title == _title)
-//    $c: Course($areas, _price, _title;)
-    $c: Course($areas, _price, _title, $year, _level, $teacher, _popularity;)
-    and Area(name == _area) from $areas
+    $c: Course($areas, $price, _title, $year, $level, $teacher, _popularity;)
+//    and Area(name == _area) from $areas
 end
 
 

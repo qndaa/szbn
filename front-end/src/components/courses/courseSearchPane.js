@@ -126,7 +126,7 @@ class CourseSearchPane extends React.Component {
                 'price' : this.state.price,
                 'year' : this.state.year,
                 'level' : this.state.level === 'Choose...' ? null : this.state.level.toUpperCase(),
-                'popularity' : this.state.popularity === 'Choose...' ? null : this.state.popularity
+                'popularity' : this.state.popularity === 'Choose...' ? null : this.state.popularity.replace(' ', '_').toUpperCase()
             })
             .then(res => {
                 this.props.update(res.data)

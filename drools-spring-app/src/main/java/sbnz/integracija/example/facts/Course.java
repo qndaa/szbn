@@ -50,8 +50,8 @@ public class Course {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany
-    private Set<Mark> marks = new HashSet<>();
+//    @OneToMany
+//    private Set<Mark> marks = new HashSet<>();
 
     @Position(3)
     @Column(name = "year", nullable = false)
@@ -93,4 +93,6 @@ public class Course {
 
     @Column(name = "discountByReview")
     private double discountByReview;
+
+    private boolean precondition;
 }

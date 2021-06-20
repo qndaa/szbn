@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8c71f868-d4a1-43a9-97ff-af6531ea2a0e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__antlr_antlr_2_7_72.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__org_antlr_ST4_4_0_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__org_antlr_antlr_3_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__org_antlr_antlr_complete_3_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__org_antlr_gunit_3_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drools-spring-app/.idea/libraries/Maven__org_antlr_stringtemplate_3_2_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/drools-spring-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/drools-spring-app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/src/main/java/sbnz/integracija/example/service/impl/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/src/main/java/sbnz/integracija/example/service/impl/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/target/classes/sbnz/integracija/example/facts/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/target/classes/sbnz/integracija/example/facts/Course.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-app/target/classes/sbnz/integracija/example/service/impl/CourseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-app/target/classes/sbnz/integracija/example/service/impl/CourseServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/src/main/resources/sbnz/integracija/cep.drl" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/src/main/resources/sbnz/integracija/cep.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/src/main/resources/sbnz/integracija/courseSearch.drl" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/src/main/resources/sbnz/integracija/courseSearch.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/target/classes/sbnz/integracija/cep.drl" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/target/classes/sbnz/integracija/cep.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/target/classes/sbnz/integracija/courseSearch.drl" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/target/classes/sbnz/integracija/courseSearch.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/target/drools-spring-kjar-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/target/drools-spring-kjar-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drools-spring-kjar/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/drools-spring-kjar/target/maven-archiver/pom.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1uAkOj6vwmq8BwJ7YV4TB8dIEHT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/front-end" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8c71f868-d4a1-43a9-97ff-af6531ea2a0e" name="Default Changelist" comment="" />
+      <created>1624115750977</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624115750977</updated>
+      <workItem from="1624115753856" duration="28000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
