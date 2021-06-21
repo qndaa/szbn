@@ -1,17 +1,33 @@
 import React from "react";
 import {Button, Card, Image, Modal, Table} from "react-bootstrap";
 import course from "../../course.jpg";
+import axios from "axios";
 
 class CourseCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal : false
+            showModal : false,
+            allPreconditions : false,
+            preconditionsFullList: []
         }
+    }
+
+    componentDidMount() {
+        const {courseId} = this.props.course
+
+        axios
+            .get('http://localhost:8080/courses/preconditions/' + courseId)
+            .then(res => {
+                this.setState({
+                    preconditionsFullList : res.data
+                })
+            })
     }
 
     render() {
         const {title, price, description, duration, courseAreas, year, levelOfCourse, preconditions, skills, popularity} = this.props.course
+
         return(
             <>
             <Card>
@@ -67,8 +83,13 @@ class CourseCard extends React.Component {
                             <td><ul className={'p-3'}>{skills.map((s, i) => <li className={'mt-2 mb-2'} key={i}>{s.name}</li>)}</ul></td>
                         </tr>
                         <tr>
-                            <td>Precondition Courses</td>
-                            <td><ol className={'p-3'}>{preconditions.map((c, i) => <li className={'mt-2 mb-2'} key={i}>{c.title}</li>)}</ol></td>
+                            <td>Precondition Courses<br/><button className="btn btn-primary" onClick={this.allPreconditions}>See all</button></td>
+                            <td>
+                                {!this.state.allPreconditions && <ol className={'p-3'}>{preconditions.map((c, i) => <li className={'mt-2 mb-2'}
+                                                                                        key={i}>{c.title}</li>)}</ol>}
+                                {this.state.allPreconditions && <ol className={'p-3'}>{this.state.preconditionsFullList.map((c, i) => <li className={'mt-2 mb-2'}
+                                                                                        key={i}>{c.title}</li>)}</ol>}
+                            </td>
                         </tr>
                         </tbody>
                         <tr>
@@ -96,6 +117,12 @@ class CourseCard extends React.Component {
     hideModal = () => {
         this.setState({
             showModal: false
+        })
+    }
+
+    allPreconditions = () => {
+        this.setState({
+            allPreconditions: !this.state.allPreconditions
         })
     }
 }
