@@ -100,7 +100,9 @@ class CourseCard extends React.Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant={'success'}>Buy</Button>
+                    {this.props.perspective === 'allCourses' && <Button variant={'success'}>Buy</Button>}
+                    {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
+                    {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'}>Quit</Button>}
                     <Button onClick={this.hideModal}>Close</Button>
                 </Modal.Footer>
             </Modal>

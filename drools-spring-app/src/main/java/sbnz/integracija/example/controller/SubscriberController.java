@@ -6,9 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.enums.CategoryOfUser;
+import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.service.SubscriberService;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -39,4 +41,13 @@ public class SubscriberController {
     }
 
 
+    @GetMapping(value = "/enrolled/{uuid}")
+    public ResponseEntity<Collection<Course>> getEnrolledCourses(@PathVariable UUID uuid) {
+        return new ResponseEntity<>(subscriberService.getEnrolledCourses(uuid), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/finished/{uuid}")
+    public ResponseEntity<Collection<Course>> getFinishedCourses(@PathVariable UUID uuid) {
+        return new ResponseEntity<>(subscriberService.getFinishedCourses(uuid), HttpStatus.OK);
+    }
 }

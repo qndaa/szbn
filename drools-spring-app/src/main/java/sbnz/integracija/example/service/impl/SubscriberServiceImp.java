@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.enums.TypeOfUser;
+import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.SubscriberService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -66,5 +70,21 @@ public class SubscriberServiceImp implements SubscriberService {
             return subscriber.getCategoryOfUser();
         }
         return null;
+    }
+
+    @Override
+    public Collection<Course> getEnrolledCourses(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        if(!subscriber.isPresent())
+            return new ArrayList<>();
+        return subscriber.get().getSubscribedCourses();
+    }
+
+    @Override
+    public Collection<Course> getFinishedCourses(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        if(!subscriber.isPresent())
+            return new ArrayList<>();
+        return subscriber.get().getCompletedCourses();
     }
 }

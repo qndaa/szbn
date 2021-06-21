@@ -75,7 +75,7 @@ class UserHome extends React.Component {
         return (
             <SubscriberLayout category={this.state.category}>
                 <CourseSearchPane update={this.updateCourses} />
-                <CourseListing courses={this.state.courses}/>
+                <CourseListing courses={this.state.courses} perspective={'allCourses'}/>
             </SubscriberLayout>
         )
     }
