@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Col, Form} from "react-bootstrap";
 import RangeSlider from 'react-bootstrap-range-slider'
 import axios from "axios";
+import {withRouter} from "react-router-dom";
 
 class CourseSearchPane extends React.Component {
     constructor(props) {
@@ -116,9 +117,20 @@ class CourseSearchPane extends React.Component {
         })
     }
 
-    search = () => {
-        axios
+    search = async () => {
+        await axios
+            .get('http://localhost:8080/users/subscriber/' + localStorage.getItem('id'))
+            .then(res => {
+                if(res.data) {
+                    localStorage.setItem("id", null);
+                    localStorage.setItem("role", null);
+                    this.props.history.push('/login');
+                }
+            })
+
+        await axios
             .post('http://localhost:8080/courses/search', {
+                'userId' : localStorage.getItem('id'),
                 'title' : this.state.title,
                 'area' : this.state.area,
                 'author': this.state.author,
@@ -148,4 +160,4 @@ class CourseSearchPane extends React.Component {
     
 }
 
-export default CourseSearchPane
+export default withRouter(CourseSearchPane)

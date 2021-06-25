@@ -18,7 +18,6 @@ import sbnz.integracija.example.service.CourseService;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -26,13 +25,13 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
     CourseRepository courseRepository;
     SubscriberRepository subscriberRepository;
-    KieSession kieSession;
+    KieSession cepSession;
     KieContainer kieContainer;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository, KieSession kieSession, SubscriberRepository subscriberRepository, KieContainer kieContainer) {
+    public CourseServiceImpl(CourseRepository courseRepository, KieSession cepSession, SubscriberRepository subscriberRepository, KieContainer kieContainer) {
         this.courseRepository = courseRepository;
-        this.kieSession = kieSession;
+        this.cepSession = cepSession;
         this.subscriberRepository = subscriberRepository;
         this.kieContainer = kieContainer;
     }
@@ -54,7 +53,14 @@ public class CourseServiceImpl implements CourseService {
         KieSession kieSession = kieContainer.newKieSession("cepKsession");
         Collection<Course> courses = new ArrayList<>();
         CourseSearchEvent searchEvent = new CourseSearchEvent(searchDTO.getUserId());
-        kieSession.insert(searchEvent);
+        cepSession.insert(searchEvent);
+        Collection<Subscriber> subs = subscriberRepository.findAll();
+        subs.forEach(cepSession::insert);
+        cepSession.getAgenda().getAgendaGroup("malware").setFocus();
+        cepSession.fireAllRules();
+        subs.forEach(subscriberRepository::save);
+        if(subscriberRepository.findById(searchDTO.getUserId()).get().isBlocked())
+            return new ArrayList<>();
         courseRepository.findAll().forEach(kieSession::insert);
         QueryResults results = kieSession.getQueryResults(
                 "courseSearch", searchDTO.getTitle(), searchDTO.getArea(), searchDTO.getAuthor(), searchDTO.getGrade(),

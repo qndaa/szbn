@@ -4,6 +4,7 @@ import LoginInfoModelValidation from "../model/LoginInfoModelValidation";
 import UserModelValidation from "../model/UserModelValidation";
 import apiUrl from "../api/ApiUrl";
 import UserModel from "../model/UserModel";
+import axios from "axios";
 
 class Login extends React.Component {
 
@@ -38,10 +39,17 @@ class Login extends React.Component {
         if (await this.isFormValid()) {
             await apiUrl.post('/login', this.state.loginInfoModel).then((response) => {
                     console.log(response.data.id);
-
                     localStorage.setItem("id", response.data.id);
                     localStorage.setItem("role", response.data.role);
-                    this.props.history.push('/');
+                    axios
+                        .get('http://localhost:8080/users/subscriber/' + response.data.id)
+                        .then(res => {
+                            if(!res.data)
+                                this.props.history.push('/');
+                            else
+                                alert('You are blocked due to suspicious activities')
+                        })
+
                 }).catch((error) => {
                     alert("Wrong data!");
                 });

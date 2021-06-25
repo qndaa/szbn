@@ -50,4 +50,9 @@ public class SubscriberController {
     public ResponseEntity<Collection<Course>> getFinishedCourses(@PathVariable UUID uuid) {
         return new ResponseEntity<>(subscriberService.getFinishedCourses(uuid), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/subscriber/{id}")
+    public ResponseEntity<Boolean> isSubscriberBlocked(@PathVariable UUID id) {
+        return new ResponseEntity<>(subscriberService.isSubscriberBlocked(id), HttpStatus.OK);
+    }
 }

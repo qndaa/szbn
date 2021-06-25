@@ -17,4 +17,6 @@ public interface SubscriberService {
     Collection<Course> getEnrolledCourses(UUID id);
 
     Collection<Course> getFinishedCourses(UUID id);
+
+    boolean isSubscriberBlocked(UUID id);
 }

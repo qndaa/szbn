@@ -87,4 +87,10 @@ public class SubscriberServiceImp implements SubscriberService {
             return new ArrayList<>();
         return subscriber.get().getCompletedCourses();
     }
+
+    @Override
+    public boolean isSubscriberBlocked(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        return subscriber.map(Subscriber::isBlocked).orElse(false);
+    }
 }
