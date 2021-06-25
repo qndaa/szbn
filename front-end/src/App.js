@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import React from "react";
 import EnrolledCourses from "./pages/EnrolledCourses";
 import FinishedCourses from "./pages/finishedCourses";
+import AuthorReport from "./pages/AuthorReport";
 
 class App extends React.Component {
 
@@ -28,6 +29,7 @@ class App extends React.Component {
                     <Route exact path={`/login`} component={Login} />
                     <Route path={'/enrolled'} component={EnrolledCourses}/>
                     <Route path={'/finished'} component={FinishedCourses}/>
+                    <Route path={'/author-report'} component={AuthorReport}/>
                 </Switch>
             </BrowserRouter>
         )

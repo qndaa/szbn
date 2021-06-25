@@ -1,36 +1,35 @@
 import java.util.UUID;
 import java.util.Collection;
 import java.util.List;
+import java.lang.Integer;
 import sbnz.integracija.example.facts.Teacher;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Area;
 import sbnz.integracija.example.enums.LevelOfCourse;
+import sbnz.integracija.example.dto.SubscribersReport;
 
 global UUID authorId;
 global Collection<Subscriber> subscribers;
-
-//global UUID courseId;
-//global Collection<Course> courses;
-
-//query precondition(UUID courseId)
-//
-//end
-
+global Integer quantity;
 global UUID _areaId;
 
 rule "list users with 3+ courses from the selected author"
+    agenda-group "report"
     when
+        $dto: SubscribersReport()
         accumulate (
             $s: Subscriber($c: completedCourses) and
-            List(size >= 3) from collect(Course($a: teacher, $a.getUserId == authorId) from $c),
+            List(size >= 3) from collect(Course($a: teacher, $a.getUserId() == authorId) from $c),
             $subs: collectList($s)
         )
     then
-        subscribers = $subs;
+        $dto.setSubscribers($subs);
+        update($dto);
 end
 
 rule "list users who finished 10+ advanced courses in the specific area"
+    agenda-group "report"
     when
         accumulate (
             $s: Subscriber($cc: completedCourses) and
@@ -43,10 +42,3 @@ rule "list users who finished 10+ advanced courses in the specific area"
     then
         subscribers = $subs;
 end
-//rule "list all precondition courses to the selected course"
-//    when
-//        accumulate(
-//            $c:
-//        )
-//    then
-//end
