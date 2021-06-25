@@ -12,4 +12,6 @@ public interface CourseService {
     void enroll(UUID userId, UUID courseId);
 
     Collection<Course> listPrerequisites(UUID course);
+
+    Collection<Course> getCoursesByAuthor(UUID authorId);
 }

@@ -13,7 +13,7 @@ class AuthorLayout extends React.Component {
         return(
             <Container fluid className={'p-0'}>
                 <Navbar collapseOnSelect expand="lg" bg={'primary'} variant="dark">
-                    <Navbar.Brand as={NavLink} to='/courses'>Courses</Navbar.Brand>
+                    <Navbar.Brand as={NavLink} to='/author-home'>Courses</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link as={NavLink} to="/author-report">Report</Nav.Link>
                     </Nav>

@@ -47,5 +47,8 @@ public class CourseController {
         return new ResponseEntity<>(courseService.listPrerequisites(UUID.fromString(course)), HttpStatus.OK);
     }
 
-
+    @GetMapping("/author/{authorId}")
+    public ResponseEntity<Collection<Course>> getCoursesByAuthor(@PathVariable UUID authorId) {
+        return new ResponseEntity<>(courseService.getCoursesByAuthor(authorId), HttpStatus.OK);
+    }
 }

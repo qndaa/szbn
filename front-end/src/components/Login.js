@@ -37,7 +37,8 @@ class Login extends React.Component {
         console.log(this.state.loginInfoModel.password);
 
         if (await this.isFormValid()) {
-            await apiUrl.post('/login', this.state.loginInfoModel).then((response) => {
+            await apiUrl.post('/login', this.state.loginInfoModel)
+                .then((response) => {
                     console.log(response.data.id);
                     localStorage.setItem("id", response.data.id);
                     localStorage.setItem("role", response.data.role);
@@ -49,6 +50,7 @@ class Login extends React.Component {
                             else
                                 alert('You are blocked due to suspicious activities')
                         })
+
 
                 }).catch((error) => {
                     alert("Wrong data!");

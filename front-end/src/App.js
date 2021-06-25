@@ -8,6 +8,7 @@ import React from "react";
 import EnrolledCourses from "./pages/EnrolledCourses";
 import FinishedCourses from "./pages/finishedCourses";
 import AuthorReport from "./pages/AuthorReport";
+import AuthorHome from "./pages/authorHome";
 
 class App extends React.Component {
 
@@ -30,6 +31,7 @@ class App extends React.Component {
                     <Route path={'/enrolled'} component={EnrolledCourses}/>
                     <Route path={'/finished'} component={FinishedCourses}/>
                     <Route path={'/author-report'} component={AuthorReport}/>
+                    <Route path={'/author-home'} component={AuthorHome}/>
                 </Switch>
             </BrowserRouter>
         )

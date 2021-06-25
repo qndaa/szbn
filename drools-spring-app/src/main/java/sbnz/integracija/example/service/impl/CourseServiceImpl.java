@@ -104,4 +104,12 @@ public class CourseServiceImpl implements CourseService {
         kieSession.dispose();
         return allCourses.stream().filter(Course::isPrecondition).collect(Collectors.toList());
     }
+
+    @Override
+    public Collection<Course> getCoursesByAuthor(UUID authorId) {
+        Collection<Course> courses = courseRepository.getCoursesByTeacher_UserId(authorId);
+        if(courses == null)
+            return new ArrayList<>();
+        return courses;
+    }
 }
