@@ -13,10 +13,8 @@ import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.SubscriberService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SubscriberServiceImp implements SubscriberService {
@@ -92,5 +90,17 @@ public class SubscriberServiceImp implements SubscriberService {
     public boolean isSubscriberBlocked(UUID id) {
         Optional<Subscriber> subscriber = subscriberRepository.findById(id);
         return subscriber.map(Subscriber::isBlocked).orElse(false);
+    }
+
+    @Override
+    public void quitCourse(UUID userId, UUID courseId) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(userId);
+        if(!subscriber.isPresent())
+            throw new IllegalArgumentException("No such subscriber");
+        Set<Course> courses = subscriber.get().getSubscribedCourses().stream()
+                .filter(course -> course.getCourseId().compareTo(courseId) != 0)
+                .collect(Collectors.toSet());
+        subscriber.get().setSubscribedCourses(courses);
+        subscriberRepository.save(subscriber.get());
     }
 }

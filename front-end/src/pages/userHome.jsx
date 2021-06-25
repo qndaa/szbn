@@ -35,40 +35,6 @@ class UserHome extends React.Component {
                     courses : res.data
                 })
             })
-        // this.setState({
-        //     courses : [
-        //         {
-        //             courseId : '123',
-        //             name : 'AI Basics',
-        //             price : '1230'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         }
-        //     ]
-        // })
     }
 
     render() {

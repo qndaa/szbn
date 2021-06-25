@@ -55,4 +55,14 @@ public class SubscriberController {
     public ResponseEntity<Boolean> isSubscriberBlocked(@PathVariable UUID id) {
         return new ResponseEntity<>(subscriberService.isSubscriberBlocked(id), HttpStatus.OK);
     }
+
+    @GetMapping("/quit-course/{userId}/{courseId}")
+    public ResponseEntity<Void> quitCourse(@PathVariable UUID userId, @PathVariable UUID courseId) {
+        try {
+            subscriberService.quitCourse(userId, courseId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -25,9 +25,20 @@ class EnrolledCourses extends React.Component {
     render() {
         return (
             <SubscriberLayout>
-                    <CourseListing courses={this.state.enrolled} perspective={'enrolledCourses'}/>
+                    <CourseListing courses={this.state.enrolled} perspective={'enrolledCourses'} quit={this.quitCourse}/>
             </SubscriberLayout>
         );
+    }
+
+    quitCourse = (id) => {
+        axios
+            .get('http://localhost:8080/users/quit-course/' + localStorage.getItem('id') + '/' + id)
+            .then(_ => {
+                this.setState({
+                    enrolled : this.state.enrolled.filter(c => c.courseId !== id)
+                })
+            })
+            .catch(_ => alert('Unexpected error'))
     }
 }
 

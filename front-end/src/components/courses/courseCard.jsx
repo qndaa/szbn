@@ -102,7 +102,7 @@ class CourseCard extends React.Component {
                 <Modal.Footer>
                     {this.props.perspective === 'allCourses' && <Button variant={'success'}>Buy</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
-                    {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'}>Quit</Button>}
+                    {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'} onClick={this.quit}>Quit</Button>}
                     <Button onClick={this.hideModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
@@ -126,6 +126,12 @@ class CourseCard extends React.Component {
         this.setState({
             allPreconditions: !this.state.allPreconditions
         })
+    }
+
+    quit = () => {
+        const {courseId} = this.props.course
+        this.props.quit(courseId)
+        this.hideModal()
     }
 }
 
