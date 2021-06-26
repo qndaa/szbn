@@ -5,6 +5,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbnz.integracija.example.dto.AuthorSubscriberReport;
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.enums.TypeOfUser;
 import sbnz.integracija.example.facts.Course;
@@ -90,6 +91,21 @@ public class SubscriberServiceImp implements SubscriberService {
     public boolean isSubscriberBlocked(UUID id) {
         Optional<Subscriber> subscriber = subscriberRepository.findById(id);
         return subscriber.map(Subscriber::isBlocked).orElse(false);
+    }
+
+    @Override
+    public Collection<AuthorSubscriberReport> getBlockedInfo() {
+        return subscriberRepository.findAll().stream()
+                .filter(Subscriber::isBlocked)
+                .map(s -> new AuthorSubscriberReport(s.getUserId(), s.getName(), s.getSurname(), s.getUsername()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateBlocked(UUID userId) {
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        subscriber.setBlocked(!subscriber.isBlocked());
+        subscriberRepository.save(subscriber);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package sbnz.integracija.example.service;
 
+import sbnz.integracija.example.dto.AuthorSubscriberReport;
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
@@ -19,6 +20,10 @@ public interface SubscriberService {
     Collection<Course> getFinishedCourses(UUID id);
 
     boolean isSubscriberBlocked(UUID id);
+
+    Collection<AuthorSubscriberReport> getBlockedInfo();
+
+    void updateBlocked(UUID userId);
 
     void quitCourse(UUID userId, UUID courseId);
 }

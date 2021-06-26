@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sbnz.integracija.example.dto.AuthorSubscriberReport;
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
@@ -54,6 +55,17 @@ public class SubscriberController {
     @GetMapping(value = "/subscriber/{id}")
     public ResponseEntity<Boolean> isSubscriberBlocked(@PathVariable UUID id) {
         return new ResponseEntity<>(subscriberService.isSubscriberBlocked(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/block-info")
+    public ResponseEntity<Collection<AuthorSubscriberReport>> getBlockInfo() {
+        return new ResponseEntity<>(subscriberService.getBlockedInfo(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/block-unblock/{id}")
+    public ResponseEntity<Void> updateBlocked(@PathVariable UUID id) {
+        subscriberService.updateBlocked(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/quit-course/{userId}/{courseId}")
