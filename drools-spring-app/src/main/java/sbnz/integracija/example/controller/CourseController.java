@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Teacher;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.service.CourseService;
 
@@ -50,5 +51,10 @@ public class CourseController {
     @GetMapping("/author/{authorId}")
     public ResponseEntity<Collection<Course>> getCoursesByAuthor(@PathVariable UUID authorId) {
         return new ResponseEntity<>(courseService.getCoursesByAuthor(authorId), HttpStatus.OK);
+    }
+
+    @GetMapping("/teacher/{courseId}")
+    private ResponseEntity<Teacher> getCourseTeacher(@PathVariable UUID courseId) {
+        return new ResponseEntity<>(courseService.getCourseTeacher(courseId), HttpStatus.OK);
     }
 }

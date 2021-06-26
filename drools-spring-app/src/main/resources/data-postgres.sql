@@ -31,7 +31,6 @@ INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VAL
 INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130007', 'Stefan', 'Stefanovic', 'stefan6@gmail.com', 'stefan1234', 2);
 INSERT INTO USERS (user_id, name, surname, username, password, type_of_user) VALUES ('ed5de8c6-b698-11eb-8529-0242ac130008', 'Stefan', 'Stefanovic', 'stefan7@gmail.com', 'stefan1234', 2);
 
-
 INSERT INTO TEACHERS(user_id) VALUES('dfc9bc30-b698-11eb-8529-0242ac130003');
 INSERT INTO TEACHERS(user_id) VALUES('e39930d4-b698-11eb-8529-0242ac130003');
 

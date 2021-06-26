@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             cepSession.insert(loginEvent);
             cepSession.getAgenda().getAgendaGroup("malware").setFocus();
             cepSession.fireAllRules();
-//            subs.forEach(subscriberRepository::save);
+            subs.forEach(subscriberRepository::save);
             return loginInfoDTO;
         }
         return null;

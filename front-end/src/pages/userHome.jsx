@@ -17,6 +17,8 @@ class UserHome extends React.Component {
     componentDidMount = async () => {
         if(localStorage.getItem('role') === 'TEACHER')
             this.props.history.push('/author-home');
+        else if(localStorage.getItem('role') === 'ADMINISTRATOR')
+            this.props.history.push('/admin-home')
 
         if (localStorage.getItem("id") === "null") {
             this.props.history.push('/login');

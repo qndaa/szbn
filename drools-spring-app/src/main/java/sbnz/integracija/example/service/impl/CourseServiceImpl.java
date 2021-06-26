@@ -12,6 +12,7 @@ import sbnz.integracija.example.events.CourseSearchEvent;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.PrerequisiteCourses;
 import sbnz.integracija.example.facts.Subscriber;
+import sbnz.integracija.example.facts.Teacher;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 import sbnz.integracija.example.repository.CourseRepository;
 import sbnz.integracija.example.repository.SubscriberRepository;
@@ -121,5 +122,12 @@ public class CourseServiceImpl implements CourseService {
         if(courses == null)
             return new ArrayList<>();
         return courses;
+    }
+
+    @Override
+    public Teacher getCourseTeacher(UUID courseId) {
+        Teacher teacher = courseRepository.findById(courseId).get().getTeacher();
+        teacher.setCourses(null);
+        return teacher;
     }
 }

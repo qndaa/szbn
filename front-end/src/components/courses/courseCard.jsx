@@ -12,6 +12,11 @@ class CourseCard extends React.Component {
             showSubsModal: false,
             allPreconditions : false,
             courseSubs : [],
+            teacher: {
+                name: '',
+                surname: '',
+                username: ''
+            },
             preconditionsFullList: []
         }
     }
@@ -26,6 +31,14 @@ class CourseCard extends React.Component {
                     preconditionsFullList : res.data
                 })
             })
+
+        axios
+            .get('http://localhost:8080/courses/teacher/' + courseId)
+            .then(res => {
+                this.setState({
+                    teacher : res.data
+                })
+            });
 
 
         if(localStorage.getItem('role') === 'TEACHER') {
@@ -72,6 +85,10 @@ class CourseCard extends React.Component {
                         <tr>
                             <td>Description</td>
                             <td>{description}</td>
+                        </tr>
+                        <tr>
+                            <td>Author</td>
+                            <td>{this.state.teacher.name + ' ' + this.state.teacher.surname + ' (' + this.state.teacher.username + ')'}</td>
                         </tr>
                         <tr>
                             <td>Duration</td>

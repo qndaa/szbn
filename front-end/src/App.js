@@ -11,6 +11,7 @@ import AuthorReport from "./pages/AuthorReport";
 import AuthorHome from "./pages/authorHome";
 import AdminReport from "./pages/adminReport";
 import AdminBlockedUsers from "./pages/adminBlockedUsers";
+import AdminHome from "./pages/adminHome";
 
 class App extends React.Component {
 
@@ -34,6 +35,7 @@ class App extends React.Component {
                     <Route path={'/finished'} component={FinishedCourses}/>
                     <Route path={'/author-report'} component={AuthorReport}/>
                     <Route path={'/author-home'} component={AuthorHome}/>
+                    <Route path={'/admin-home'} component={AdminHome}/>
                     <Route path={'/admin-report'} component={AdminReport}/>
                     <Route path={'/block-unblock'} component={AdminBlockedUsers}/>
                 </Switch>
