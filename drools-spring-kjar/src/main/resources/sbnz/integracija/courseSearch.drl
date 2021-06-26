@@ -13,13 +13,37 @@
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Area;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
+import sbnz.integracija.example.dto.CourseSearch;
 import java.time.LocalDate;
 import sbnz.integracija.example.enums.PopularityCategory;
 import sbnz.integracija.example.enums.LevelOfCourse;
 
-query courseSearch(String _title, String _area, String _author, int _grade, double _price, LocalDate _year, LevelOfCourse _level, PopularityCategory _popularity)
-    $c: Course($areas, $price, _title, $year, $level, $teacher, _popularity;)
-//    and Area(name == _area) from $areas
+
+//query courseSearch(String _title, String _area, String _author, int _grade, double _price, LocalDate _year, LevelOfCourse _level, PopularityCategory _popularity)
+//    $c: Course($areas, $price, _title, $year, $level, $teacher, _popularity;)
+////    and Area(name == _area) from $areas
+//end
+
+global String _title;
+global String _area;
+global Double _price;
+global LocalDate _year;
+global LevelOfCourse _level;
+global PopularityCategory _popularity;
+
+rule "search courses"
+    agenda-group "search"
+    when
+        $cs: CourseSearch()
+        accumulate(
+//            $c: Course(title == _title, $a: courseAreas, price < _price.doubleValue(), levelOfCourse == _level, popularity == _popularity) and
+            $c: Course(title == _title, $a: courseAreas, year.isAfter(_year), levelOfCourse == _level, popularity == _popularity, price < _price) and
+            Area(name == _area) from $a,
+            $courses: collectList($c)
+        )
+    then
+        $cs.setCourses($courses);
+        update($cs);
 end
 
 

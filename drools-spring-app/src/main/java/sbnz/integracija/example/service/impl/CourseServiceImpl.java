@@ -6,6 +6,7 @@ import org.kie.api.runtime.rule.QueryResults;
 import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbnz.integracija.example.dto.CourseSearch;
 import sbnz.integracija.example.events.CourseEnrollmentEvent;
 import sbnz.integracija.example.events.CourseSearchEvent;
 import sbnz.integracija.example.facts.Course;
@@ -51,7 +52,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Collection<Course> search(CourseSearchDTO searchDTO) {
         KieSession kieSession = kieContainer.newKieSession("cepKsession");
-        Collection<Course> courses = new ArrayList<>();
         CourseSearchEvent searchEvent = new CourseSearchEvent(searchDTO.getUserId());
         cepSession.insert(searchEvent);
         Collection<Subscriber> subs = subscriberRepository.findAll();
@@ -62,12 +62,22 @@ public class CourseServiceImpl implements CourseService {
         if(subscriberRepository.findById(searchDTO.getUserId()).get().isBlocked())
             return new ArrayList<>();
         courseRepository.findAll().forEach(kieSession::insert);
-        QueryResults results = kieSession.getQueryResults(
-                "courseSearch", searchDTO.getTitle(), searchDTO.getArea(), searchDTO.getAuthor(), searchDTO.getGrade(),
-                searchDTO.getPrice(), searchDTO.getYear(), searchDTO.getLevel(), searchDTO.getPopularity());
-        for(QueryResultsRow row : results) courses.add((Course) row.get("$c"));
+        CourseSearch search = new CourseSearch();
+        kieSession.insert(search);
+//        QueryResults results = kieSession.getQueryResults(
+//                "courseSearch", searchDTO.getTitle(), searchDTO.getArea(), searchDTO.getAuthor(), searchDTO.getGrade(),
+//                searchDTO.getPrice(), searchDTO.getYear(), searchDTO.getLevel(), searchDTO.getPopularity());
+//        for(QueryResultsRow row : results) courses.add((Course) row.get("$c"));
+        kieSession.getAgenda().getAgendaGroup("search").setFocus();
+        kieSession.setGlobal("_title", searchDTO.getTitle());
+        kieSession.setGlobal("_area", searchDTO.getArea());
+        kieSession.setGlobal("_price", searchDTO.getPrice());
+        kieSession.setGlobal("_level", searchDTO.getLevel());
+        kieSession.setGlobal("_year", searchDTO.getYear());
+        kieSession.setGlobal("_popularity", searchDTO.getPopularity());
+        kieSession.fireAllRules();
         kieSession.dispose();
-        return courses;
+        return search.getCourses();
 //        return null;
     }
 

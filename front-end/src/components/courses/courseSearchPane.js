@@ -13,12 +13,23 @@ class CourseSearchPane extends React.Component {
             area : null,
             author : null,
             duration : null,
-            price : null,
+            price : 15000,
             grade : null,
             year : null,
             popularity : 'Choose...',
-            level : 'Choose...'
+            level : 'Choose...',
+            areas : []
         }
+    }
+
+    componentDidMount() {
+        axios
+            .get('http://localhost:8080/areas')
+            .then(res => {
+                this.setState({
+                    areas: res.data
+                })
+            })
     }
 
     render() {
@@ -42,26 +53,16 @@ class CourseSearchPane extends React.Component {
 
                     <Form.Group as={Col} controlId="formGridArea">
                         <Form.Label>Area</Form.Label>
-                        <Form.Control name={'area'} value={this.state.area} placeholder="Enter Area"
-                                      onChange={this.handleChange}/>
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridAuthor">
-                        <Form.Label>Author</Form.Label>
-                        <Form.Control name={'author'} value={this.state.author} placeholder="Enter Author"
-                                      onChange={this.handleChange}/>
+                        <Form.Control name={'area'} as="select" value={this.state.area}
+                                      defaultValue="Choose..." onChange={this.handleChange}>
+                            <option>Choose...</option>
+                            {this.state.areas.map((a, ind) => <option key={ind}>{a.name}</option>)}
+                        </Form.Control>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridGrade">
-                        <Form.Label>Grade</Form.Label>
-                        <Form.Control name={'grade'} type={'range'} value={this.state.grade} min={'1'} max={'5'}
-                                      step={'1'} onChange={this.handleChange}/>
-                        {this.state.grade}
-                    </Form.Group>
-
                     <Form.Group as={Col} controlId="formGridPrice">
-                        <Form.Label>Price</Form.Label>
+                        <Form.Label>Price (less than)</Form.Label>
                         <Form.Control name={'price'} type={'range'} value={this.state.price} min={'0'} max={'25000'}
                                       onChange={this.handleChange}/>
                         ${this.state.price}
@@ -69,7 +70,7 @@ class CourseSearchPane extends React.Component {
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridYear">
-                        <Form.Label>Year of Creation</Form.Label>
+                        <Form.Label>Year of Creation (after year)</Form.Label>
                         <Form.Control name={'year'} type={'number'} value={this.state.year} min={'2000'}
                                       max={new Date().getFullYear()} onChange={this.handleChange}/>
                     </Form.Group>
@@ -118,6 +119,11 @@ class CourseSearchPane extends React.Component {
     }
 
     search = async () => {
+        if(this.state.title === '' || this.state.area === 'Choose...' || this.state.year == null || this.state.popularity === 'Choose...' || this.state.level === 'Choose...') {
+            alert('Some fields were left empty')
+            return
+        }
+
         await axios
             .get('http://localhost:8080/users/subscriber/' + localStorage.getItem('id'))
             .then(res => {
@@ -136,7 +142,7 @@ class CourseSearchPane extends React.Component {
                 'author': this.state.author,
                 'grade' : this.state.grade,
                 'price' : this.state.price,
-                'year' : this.state.year,
+                'year' : this.state.year + '-10-10',
                 'level' : this.state.level === 'Choose...' ? null : this.state.level.toUpperCase(),
                 'popularity' : this.state.popularity === 'Choose...' ? null : this.state.popularity.replace(' ', '_').toUpperCase()
             })
