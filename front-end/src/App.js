@@ -9,6 +9,7 @@ import EnrolledCourses from "./pages/EnrolledCourses";
 import FinishedCourses from "./pages/finishedCourses";
 import AuthorReport from "./pages/AuthorReport";
 import AuthorHome from "./pages/authorHome";
+import AdminReport from "./pages/adminReport";
 
 class App extends React.Component {
 
@@ -32,6 +33,7 @@ class App extends React.Component {
                     <Route path={'/finished'} component={FinishedCourses}/>
                     <Route path={'/author-report'} component={AuthorReport}/>
                     <Route path={'/author-home'} component={AuthorHome}/>
+                    <Route path={'/admin-report'} component={AdminReport}/>
                 </Switch>
             </BrowserRouter>
         )

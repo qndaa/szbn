@@ -11,8 +11,8 @@ import sbnz.integracija.example.dto.SubscribersReport;
 
 global UUID authorId;
 global Collection<Subscriber> subscribers;
-global Integer quantity;
-global UUID _areaId;
+global UUID _courseId;
+global String area;
 
 rule "list users with 3+ courses from the selected author"
     agenda-group "report"
@@ -29,16 +29,32 @@ rule "list users with 3+ courses from the selected author"
 end
 
 rule "list users who finished 10+ advanced courses in the specific area"
-    agenda-group "report"
+    agenda-group "admin-report"
     when
+        $dto: SubscribersReport()
         accumulate (
             $s: Subscriber($cc: completedCourses) and
             $c: Course($areas: courseAreas, levelOfCourse == LevelOfCourse.ADVANCED) from $cc and
-            Area(areaId == _areaId) from $areas,
+            Area(name == area) from $areas,
             $courses : collectList($c),
-            $subs: collectList($s)
+            $subs: collectSet($s)
         )
-        eval ($courses.size() >= 10)
+        eval ($courses.size() >= 5)
     then
-        subscribers = $subs;
+        $dto.setSubscribers($subs);
+        update($dto);
+end
+
+rule "list users enrolled in a specific course"
+    agenda-group "soft-report"
+    when
+        $dto: SubscribersReport()
+        accumulate(
+           $s: Subscriber($sc: subscribedCourses) and
+           Course(courseId == _courseId) from $sc,
+           $subs: collectList($s)
+        )
+    then
+        $dto.setSubscribers($subs);
+        update($dto);
 end

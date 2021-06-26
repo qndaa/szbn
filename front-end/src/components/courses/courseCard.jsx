@@ -2,13 +2,16 @@ import React from "react";
 import {Button, Card, Image, Modal, Table} from "react-bootstrap";
 import course from "../../course.jpg";
 import axios from "axios";
+import SubscriberListing from "../subscriberListing";
 
 class CourseCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal : false,
+            showSubsModal: false,
             allPreconditions : false,
+            courseSubs : [],
             preconditionsFullList: []
         }
     }
@@ -23,6 +26,17 @@ class CourseCard extends React.Component {
                     preconditionsFullList : res.data
                 })
             })
+
+
+        if(localStorage.getItem('role') === 'TEACHER') {
+            axios
+                .get('http://localhost:8080/report/course-subscriber/' + courseId)
+                .then(res => {
+                    this.setState({
+                        courseSubs : res.data
+                    })
+                })
+        }
     }
 
     render() {
@@ -43,6 +57,7 @@ class CourseCard extends React.Component {
                 </Card.Body>
                 <Card.Footer>
                         <Button onClick={this.showModal}>See more</Button>
+                        {this.props.perspective === 'author' && <Button className={'btn btn-success ml-2'} onClick={this.showSubsModal}>See subscribers</Button>}
                 </Card.Footer>
             </Card>
 
@@ -106,6 +121,19 @@ class CourseCard extends React.Component {
                     <Button onClick={this.hideModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
+            <Modal show={this.state.showSubsModal} size="lg" centered>
+                <Modal.Header>
+                    Subscribers
+                </Modal.Header>
+                <Modal.Body>
+                    <SubscriberListing data={this.state.courseSubs}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.hideSubsModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
             </>
         )
     }
@@ -119,6 +147,18 @@ class CourseCard extends React.Component {
     hideModal = () => {
         this.setState({
             showModal: false
+        })
+    }
+
+    showSubsModal = () => {
+        this.setState({
+            showSubsModal: true
+        })
+    }
+
+    hideSubsModal = () => {
+        this.setState({
+            showSubsModal: false
         })
     }
 

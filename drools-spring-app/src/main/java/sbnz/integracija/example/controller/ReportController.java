@@ -27,4 +27,14 @@ public class ReportController {
     public ResponseEntity<Collection<AuthorSubscriberReport>> finishedCoursesFromAuthor(@PathVariable UUID id) {
         return new ResponseEntity<>(reportService.finishedCoursesFromAuthor(id), HttpStatus.OK);
     }
+
+    @GetMapping("/course-subscriber/{id}")
+    public ResponseEntity<Collection<AuthorSubscriberReport>> subsEnrolledInCourse(@PathVariable UUID id) {
+        return new ResponseEntity<>(reportService.getEnrolledSubscribers(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/area-subscriber/{area}")
+    public ResponseEntity<Collection<AuthorSubscriberReport>> advancedSubscribers(@PathVariable String area) {
+        return new ResponseEntity<>(reportService.getAdvancedSubscribers(area), HttpStatus.OK);
+    }
 }
