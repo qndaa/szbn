@@ -21,11 +21,14 @@ class UserHome extends React.Component {
             return;
         }
 
-        await apiUrl.get('/users/updateCategory/' + localStorage.getItem("id"))
-            .then((response) => {
-            console.log(response);
-            this.setState({category: response.data});
-        })
+        if (localStorage.getItem('role') === 'SUBSCRIBER') {
+            await apiUrl.get('/users/updateCategory/' + localStorage.getItem("id"))
+                .then((response) => {
+                    console.log(response);
+                    this.setState({category: response.data});
+                })
+        }
+
 
 
         axios

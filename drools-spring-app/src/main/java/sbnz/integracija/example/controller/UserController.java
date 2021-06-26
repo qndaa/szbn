@@ -12,6 +12,7 @@ import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.service.UserService;
 
 @RestController
+@RequestMapping(value = "/users")
 public class UserController {
 
     private UserService userService;

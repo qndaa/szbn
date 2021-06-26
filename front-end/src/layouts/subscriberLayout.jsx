@@ -8,6 +8,13 @@ class SubscriberLayout extends React.Component {
         localStorage.setItem("role", null);
     }
 
+    renderCategoryOfUser = () => {
+        if (localStorage.getItem('role') === 'SUBSCRIBER') {
+            return (<label className={`text-white mt-2 ml-5 pl-2`}>CATEGORY OF USER: {this.props.category}</label>);
+        }
+    }
+
+
     render() {
         return(
             <Container fluid className={'p-0'}>
@@ -19,11 +26,11 @@ class SubscriberLayout extends React.Component {
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
 
-                    <label className={`text-white mt-2 ml-5 pl-2`}>CATEGORY OF USER: {this.props.category}</label>
-
+                    {this.renderCategoryOfUser()}
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
                         <Nav>
+                            {this.renderMyCoursesNavLin()}
                             <Nav.Link href={`/login`} ><button onClick={this.logout} className={`btn btn-primary`}>Log out</button></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
@@ -33,6 +40,13 @@ class SubscriberLayout extends React.Component {
                 </Container>
             </Container>
         )
+    }
+
+    renderMyCoursesNavLin() {
+        if (localStorage.getItem('role') === 'TEACHER') {
+            return (<Nav.Link href={`/myCourses`} ><button className={`btn btn-primary`}>My courses</button></Nav.Link>);
+        }
+
     }
 }
 

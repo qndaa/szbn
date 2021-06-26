@@ -10,4 +10,10 @@ public interface CourseService {
     Collection<Course> getAll();
     Collection<Course> search(CourseSearchDTO searchDTO);
     void enroll(UUID userId, UUID courseId);
+
+    Collection<Course> getCoursesByTeacher(String id);
+
+    boolean deleteCourse(String id);
+
+    void save(Course course);
 }

@@ -36,8 +36,7 @@ class Login extends React.Component {
         console.log(this.state.loginInfoModel.password);
 
         if (await this.isFormValid()) {
-            await apiUrl.post('/login', this.state.loginInfoModel).then((response) => {
-                    console.log(response.data.id);
+            await apiUrl.post('/users/login', this.state.loginInfoModel).then((response) => {
 
                     localStorage.setItem("id", response.data.id);
                     localStorage.setItem("role", response.data.role);

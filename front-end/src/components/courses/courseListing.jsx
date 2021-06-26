@@ -5,7 +5,11 @@ import course from "../../course.jpg"
 
 class CourseListing extends React.Component {
     render() {
-        const courses = this.props.courses.map((c, idx) => <CourseCard course={c} key={idx}/>)
+        const courses = this.props.courses.map((c, idx) => {
+            if (c.deleted === false) {
+                return (<CourseCard course={c} key={idx}/>);
+            }
+        })
 
         return (
                 <CardColumns>

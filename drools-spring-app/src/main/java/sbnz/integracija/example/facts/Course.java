@@ -1,5 +1,6 @@
 package sbnz.integracija.example.facts;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,11 +8,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.kie.api.definition.type.Position;
+import org.springframework.format.annotation.DateTimeFormat;
 import sbnz.integracija.example.enums.LevelOfCourse;
 import sbnz.integracija.example.enums.PopularityCategory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -63,7 +66,7 @@ public class Course {
     private LevelOfCourse levelOfCourse;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PRECONDITIONS",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "precondition_id", referencedColumnName = "course_id"))
@@ -93,4 +96,12 @@ public class Course {
 
     @Column(name = "discountByReview")
     private double discountByReview;
+
+    @Column(name = "deleted")
+    private boolean deleted;
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

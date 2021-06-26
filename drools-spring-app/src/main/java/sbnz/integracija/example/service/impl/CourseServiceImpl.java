@@ -69,4 +69,31 @@ public class CourseServiceImpl implements CourseService {
 //        kieSession.getAgenda().getAgendaGroup("MAIN").setFocus();
 
     }
+
+    @Override
+    public Collection<Course> getCoursesByTeacher(String id) {
+        Collection<Course> courses = this.courseRepository.getCoursesByTeacher(UUID.fromString(id));
+        courses.forEach(c -> kieSession.insert(c));
+        subscriberRepository.findAll().forEach(s -> kieSession.insert(s));
+        kieSession.fireAllRules();
+        courses.forEach(c -> courseRepository.save(c));
+        return courses;
+    }
+
+    @Override
+    public boolean deleteCourse(String id) {
+        Course c = courseRepository.findById(UUID.fromString(id)).get();
+        if (c == null) {
+            return false;
+        } else {
+            c.setDeleted(true);
+            this.courseRepository.save(c);
+            return true;
+        }
+    }
+
+    @Override
+    public void save(Course course) {
+        this.courseRepository.save(course);
+    }
 }

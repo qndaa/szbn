@@ -5,6 +5,7 @@ import UserHome from "./pages/userHome";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import React from "react";
+import MyCourses from "./components/MyCourses";
 
 class App extends React.Component {
 
@@ -24,6 +25,7 @@ class App extends React.Component {
                     <Route exact path="/courses" component={UserHome}/>
                     <Route exact path={`/registration`} component={Registration} />
                     <Route exact path={`/login`} component={Login} />
+                    <Route exact path={`/myCourses`} component={MyCourses} />
                 </Switch>
             </BrowserRouter>
         )

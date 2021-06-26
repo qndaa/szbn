@@ -1,7 +1,6 @@
 import React from "react";
 import UserModel from "../model/UserModel"
 import UserModelValidation from "../model/UserModelValidation";
-import axios from "axios";
 import apiUrl from '../api/ApiUrl'
 
 class Registration extends React.Component {
