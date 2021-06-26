@@ -3,13 +3,14 @@ package sbnz.integracija.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.dto.LoginInfoDTO;
+import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.User;
 import sbnz.integracija.example.service.UserService;
+
+import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/users")

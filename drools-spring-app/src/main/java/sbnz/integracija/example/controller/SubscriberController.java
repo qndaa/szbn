@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sbnz.integracija.example.dto.AuthorSubscriberReport;
 import sbnz.integracija.example.enums.CategoryOfUser;
+import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.service.SubscriberService;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -39,4 +42,39 @@ public class SubscriberController {
     }
 
 
+    @GetMapping(value = "/enrolled/{uuid}")
+    public ResponseEntity<Collection<Course>> getEnrolledCourses(@PathVariable UUID uuid) {
+        return new ResponseEntity<>(subscriberService.getEnrolledCourses(uuid), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/finished/{uuid}")
+    public ResponseEntity<Collection<Course>> getFinishedCourses(@PathVariable UUID uuid) {
+        return new ResponseEntity<>(subscriberService.getFinishedCourses(uuid), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/subscriber/{id}")
+    public ResponseEntity<Boolean> isSubscriberBlocked(@PathVariable UUID id) {
+        return new ResponseEntity<>(subscriberService.isSubscriberBlocked(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/block-info")
+    public ResponseEntity<Collection<AuthorSubscriberReport>> getBlockInfo() {
+        return new ResponseEntity<>(subscriberService.getBlockedInfo(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/block-unblock/{id}")
+    public ResponseEntity<Void> updateBlocked(@PathVariable UUID id) {
+        subscriberService.updateBlocked(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/quit-course/{userId}/{courseId}")
+    public ResponseEntity<Void> quitCourse(@PathVariable UUID userId, @PathVariable UUID courseId) {
+        try {
+            subscriberService.quitCourse(userId, courseId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

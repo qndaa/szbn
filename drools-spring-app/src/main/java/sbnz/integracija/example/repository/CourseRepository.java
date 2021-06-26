@@ -12,4 +12,5 @@ public interface CourseRepository extends JpaRepository<Course, UUID> {
 
     @Query("SELECT course FROM Course course WHERE ?1 = course.teacher.userId")
     Collection<Course> getCoursesByTeacher(UUID id);
+    Collection<Course> getCoursesByTeacher_UserId(UUID userId);
 }

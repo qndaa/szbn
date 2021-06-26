@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sbnz.integracija.example.facts.Area;
 import sbnz.integracija.example.service.AreaService;
-import sbnz.integracija.example.service.CourseService;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/areas")
+@RequestMapping("/areas")
 public class AreaController {
-
-    AreaService areaService;
+    private final AreaService areaService;
 
     @Autowired
     public AreaController(AreaService areaService) {
@@ -25,9 +23,13 @@ public class AreaController {
 
 
     @GetMapping(value = "/all")
-    public ResponseEntity<Collection<Area>> getAll() {
+    public ResponseEntity<Collection<Area>> getAllAreas() {
         return new ResponseEntity<>(this.areaService.getAll(), HttpStatus.OK);
     }
 
 
+    @GetMapping
+    public ResponseEntity<Collection<Area>> getAll() {
+        return new ResponseEntity<>(areaService.getAll(), HttpStatus.OK);
+    }
 }

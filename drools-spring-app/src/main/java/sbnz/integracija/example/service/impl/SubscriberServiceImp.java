@@ -5,14 +5,17 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbnz.integracija.example.dto.AuthorSubscriberReport;
 import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.enums.TypeOfUser;
+import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.SubscriberService;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SubscriberServiceImp implements SubscriberService {
@@ -66,5 +69,54 @@ public class SubscriberServiceImp implements SubscriberService {
             return subscriber.getCategoryOfUser();
         }
         return null;
+    }
+
+    @Override
+    public Collection<Course> getEnrolledCourses(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        if(!subscriber.isPresent())
+            return new ArrayList<>();
+        return subscriber.get().getSubscribedCourses();
+    }
+
+    @Override
+    public Collection<Course> getFinishedCourses(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        if(!subscriber.isPresent())
+            return new ArrayList<>();
+        return subscriber.get().getCompletedCourses();
+    }
+
+    @Override
+    public boolean isSubscriberBlocked(UUID id) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(id);
+        return subscriber.map(Subscriber::isBlocked).orElse(false);
+    }
+
+    @Override
+    public Collection<AuthorSubscriberReport> getBlockedInfo() {
+        return subscriberRepository.findAll().stream()
+                .filter(Subscriber::isBlocked)
+                .map(s -> new AuthorSubscriberReport(s.getUserId(), s.getName(), s.getSurname(), s.getUsername()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateBlocked(UUID userId) {
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        subscriber.setBlocked(!subscriber.isBlocked());
+        subscriberRepository.save(subscriber);
+    }
+
+    @Override
+    public void quitCourse(UUID userId, UUID courseId) {
+        Optional<Subscriber> subscriber = subscriberRepository.findById(userId);
+        if(!subscriber.isPresent())
+            throw new IllegalArgumentException("No such subscriber");
+        Set<Course> courses = subscriber.get().getSubscribedCourses().stream()
+                .filter(course -> course.getCourseId().compareTo(courseId) != 0)
+                .collect(Collectors.toSet());
+        subscriber.get().setSubscribedCourses(courses);
+        subscriberRepository.save(subscriber.get());
     }
 }

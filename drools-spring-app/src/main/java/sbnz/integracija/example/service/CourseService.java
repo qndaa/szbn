@@ -1,6 +1,7 @@
 package sbnz.integracija.example.service;
 
 import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Teacher;
 import sbnz.integracija.example.facts.dto.CourseSearchDTO;
 
 import java.util.Collection;
@@ -16,4 +17,9 @@ public interface CourseService {
     boolean deleteCourse(String id);
 
     void save(Course course);
+    Collection<Course> listPrerequisites(UUID course);
+
+    Collection<Course> getCoursesByAuthor(UUID authorId);
+
+    Teacher getCourseTeacher(UUID courseId);
 }

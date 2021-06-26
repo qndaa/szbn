@@ -15,6 +15,10 @@ class UserHome extends React.Component {
     }
 
     componentDidMount = async () => {
+        if(localStorage.getItem('role') === 'TEACHER')
+            this.props.history.push('/author-home');
+        else if(localStorage.getItem('role') === 'ADMINISTRATOR')
+            this.props.history.push('/admin-home')
 
         if (localStorage.getItem("id") === "null") {
             this.props.history.push('/login');
@@ -38,47 +42,13 @@ class UserHome extends React.Component {
                     courses : res.data
                 })
             })
-        // this.setState({
-        //     courses : [
-        //         {
-        //             courseId : '123',
-        //             name : 'AI Basics',
-        //             price : '1230'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         },
-        //         {
-        //             courseId : '124',
-        //             name : 'AI Advanced',
-        //             price : '1235'
-        //         }
-        //     ]
-        // })
     }
 
     render() {
         return (
             <SubscriberLayout category={this.state.category}>
                 <CourseSearchPane update={this.updateCourses} />
-                <CourseListing courses={this.state.courses}/>
+                <CourseListing courses={this.state.courses} perspective={'allCourses'}/>
             </SubscriberLayout>
         )
     }

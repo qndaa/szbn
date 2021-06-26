@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.facts.Area;
 import sbnz.integracija.example.repository.AreaRepository;
-import sbnz.integracija.example.repository.SkillRepository;
 import sbnz.integracija.example.service.AreaService;
 
 import java.util.Collection;
@@ -24,5 +23,6 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public Collection<Area> getAll() {
         return this.areaRepository.findAll();
+
     }
 }

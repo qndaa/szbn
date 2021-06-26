@@ -1,34 +1,49 @@
-package sbnz.integracija;
-
+//package sbnz.integracija;
+//
 import sbnz.integracija.example.facts.*
 import sbnz.integracija.example.events.*
-dialect  "mvel"
+//dialect  "mvel"
+//
+//
+//
+//rule "Less than 10 enrollemet in 30 days - discount 10%"
+//    when
+//        $c: Course($id : courseId)
+//        Number(intValue < 10) from accumulate (
+//            $ce: CourseEnrollmentEvent(courseId == $id) over window:time(30d)
+//            count($ce)
+//        )
+//    then
+//
+//    modify($c){setDiscountByEnrollment(10)}
+//
+//end
+//
+//
+//rule "30 and more course review discount - 25%"
+//    when
+//        $c: Course($id: courseId)
+//        Number(intValue > 30) from accumulate (
+//            $cr: CourseReview(courseId == $id) over window:time(5m)
+//            count($cr)
+//        )
+//    then
+//
+//    modify($c){setDiscountByReview(25)}
+//
+//end
 
-
-
-rule "Less than 10 enrollemet in 30 days - discount 10%"
+rule "30+ views in the last 5 mins and less than 10 enrollments in the last 30 days -> 25% discount"
     when
-        $c: Course($id : courseId)
-        Number(intValue < 10) from accumulate (
-            $ce: CourseEnrollmentEvent(courseId == $id) over window:time(30d)
-            count($ce)
+        $c: Course($id: courseId) and
+        Number(intValue >= 30) from accumulate (
+            $e: CourseReview(courseId == $id) over window:time(5m),
+            count($e)
+        ) and
+        Number(intValue <= 10) from accumulate (
+            $en: CourseEnrollmentEvent(courseId == $id) over window:time(43200m),
+            count($en)
         )
     then
-
-    modify($c){setDiscountByEnrollment(10)}
-
-end
-
-
-rule "30 and more course review discount - 25%"
-    when
-        $c: Course($id: courseId)
-        Number(intValue > 30) from accumulate (
-            $cr: CourseReview(courseId == $id) over window:time(5m)
-            count($cr)
-        )
-    then
-
-    modify($c){setDiscountByReview(25)}
-
+        modify($c){setDiscountByEnrollment(25)}
 end

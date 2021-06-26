@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import UserHome from "./pages/userHome";
@@ -6,6 +5,13 @@ import Registration from "./components/Registration";
 import Login from "./components/Login";
 import React from "react";
 import MyCourses from "./components/MyCourses";
+import EnrolledCourses from "./pages/EnrolledCourses";
+import FinishedCourses from "./pages/finishedCourses";
+import AuthorReport from "./pages/AuthorReport";
+import AuthorHome from "./pages/authorHome";
+import AdminReport from "./pages/adminReport";
+import AdminBlockedUsers from "./pages/adminBlockedUsers";
+import AdminHome from "./pages/adminHome";
 
 class App extends React.Component {
 
@@ -26,6 +32,13 @@ class App extends React.Component {
                     <Route exact path={`/registration`} component={Registration} />
                     <Route exact path={`/login`} component={Login} />
                     <Route exact path={`/myCourses`} component={MyCourses} />
+                    <Route path={'/enrolled'} component={EnrolledCourses}/>
+                    <Route path={'/finished'} component={FinishedCourses}/>
+                    <Route path={'/author-report'} component={AuthorReport}/>
+                    <Route path={'/author-home'} component={AuthorHome}/>
+                    <Route path={'/admin-home'} component={AdminHome}/>
+                    <Route path={'/admin-report'} component={AdminReport}/>
+                    <Route path={'/block-unblock'} component={AdminBlockedUsers}/>
                 </Switch>
             </BrowserRouter>
         )

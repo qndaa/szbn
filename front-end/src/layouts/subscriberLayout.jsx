@@ -1,5 +1,6 @@
 import React from "react";
-import {Container, Nav, Navbar, NavLink, Row} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 
 class SubscriberLayout extends React.Component {
 
@@ -19,11 +20,10 @@ class SubscriberLayout extends React.Component {
         return(
             <Container fluid className={'p-0'}>
                 <Navbar collapseOnSelect expand="lg" bg={'primary'} variant="dark">
-                    <Navbar.Brand as={NavLink} to='/'>Courses</Navbar.Brand>
+                    <Navbar.Brand as={NavLink} to='/courses'>Courses</Navbar.Brand>
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link as={NavLink} to="/enrolled">Enrolled courses</Nav.Link>
+                        <Nav.Link as={NavLink} to="/finished">Finished courses</Nav.Link>
                     </Nav>
 
                     {this.renderCategoryOfUser()}

@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import sbnz.integracija.example.enums.TypeOfUser;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "USERS")
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -39,4 +40,17 @@ public abstract class User {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "type_of_user", nullable = false)
     private TypeOfUser typeOfUser;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId);
+    }
 }
