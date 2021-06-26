@@ -4,6 +4,7 @@ import course from "../../course.jpg";
 import api from "../../api/ApiUrl";
 import axios from "axios";
 import SubscriberListing from "../subscriberListing";
+import {withRouter} from 'react-router-dom'
 
 class CourseCard extends React.Component {
     constructor(props) {
@@ -192,6 +193,7 @@ class CourseCard extends React.Component {
 
                 </Modal.Body>
                 <Modal.Footer>
+                    {this.renderDeleteButton(courseId)}
                     {this.props.perspective === 'allCourses' && <Button variant={'success'}>Buy</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'} onClick={this.quit}>Quit</Button>}
@@ -216,17 +218,22 @@ class CourseCard extends React.Component {
     }
 
     renderDeleteButton = (id) => {
-        if (localStorage.getItem('role') === 'TEACHER') {
+        if (localStorage.getItem('role') === 'TEACHER' || localStorage.getItem('role') === 'ADMINISTRATOR') {
             return (<Button className={`btn btn-danger`} onClick={this.deleteCourse(id)}>Delete</Button>);
         }
     }
 
     deleteCourse = (id) => {
-        return function () {
+        return () => {
             console.log(id);
             api.delete('/courses/' + id).then(response => {
                 alert("Course deleted!");
-                this.props.history.push('/myCourses');
+                // this.props.history.push('/myCourses');
+                // this.setState({
+                //     showModal : false
+                // })
+                // this.componentDidMount()
+                window.location.reload()
             });
         }
     }
@@ -274,4 +281,4 @@ class CourseCard extends React.Component {
     }
 }
 
-export default CourseCard
+export default withRouter(CourseCard)

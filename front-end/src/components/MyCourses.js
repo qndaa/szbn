@@ -4,6 +4,7 @@ import CourseListing from "./courses/courseListing";
 import {Modal, ModalBody} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import Course from "../model/Course";
+import AuthorLayout from "../layouts/authorLayout";
 
 class MyCourses extends React.Component {
 
@@ -134,8 +135,9 @@ class MyCourses extends React.Component {
 
     render() {
         return (
+            <AuthorLayout>
             <div className={`container`}>
-                <div className={`row mt-5`}>
+                <div className={`row`}>
                     <div className={`col-4`}>
 
                     </div>
@@ -259,6 +261,7 @@ class MyCourses extends React.Component {
                 </Modal>
 
             </div>
+            </AuthorLayout>
         )
     }
 
