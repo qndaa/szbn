@@ -84,19 +84,29 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void enroll(UUID userId, UUID courseId) {
-        KieSession kieSession = kieContainer.newKieSession("cepKsession");
+//        KieSession kieSession = kieContainer.newKieSession("cepKsession");
+//        Subscriber subscriber = subscriberRepository.findById(userId).get();
+//        if(subscriber.isBlocked())
+//            throw new IllegalStateException("Blocked user cannot enroll in courses!");
+//        CourseEnrollmentEvent enrollment = new CourseEnrollmentEvent(userId, courseId);
+//        kieSession.insert(enrollment);
+//        kieSession.insert(subscriber);
+////        kieSession.getAgenda().getAgendaGroup("malware").setFocus();
+//        kieSession.fireAllRules();
+//        subscriberRepository.save(subscriber);
+////        kieSession.getAgenda().getAgendaGroup("MAIN").setFocus();
+//        kieSession.dispose();
         Subscriber subscriber = subscriberRepository.findById(userId).get();
         if(subscriber.isBlocked())
             throw new IllegalStateException("Blocked user cannot enroll in courses!");
         CourseEnrollmentEvent enrollment = new CourseEnrollmentEvent(userId, courseId);
-        kieSession.insert(enrollment);
-        kieSession.insert(subscriber);
-//        kieSession.getAgenda().getAgendaGroup("malware").setFocus();
-        kieSession.fireAllRules();
+        cepSession.insert(enrollment);
+        cepSession.insert(subscriber);
+        cepSession.getAgenda().getAgendaGroup("malware").setFocus();
+        cepSession.fireAllRules();
         subscriberRepository.save(subscriber);
-//        kieSession.getAgenda().getAgendaGroup("MAIN").setFocus();
-        kieSession.dispose();
 
+        // dodati kurs u listu upisanih kurseva korisnika
     }
 
     @Override

@@ -1,7 +1,7 @@
 //package sbnz.integracija;
 //
-import sbnz.integracija.example.facts.*
-import sbnz.integracija.example.events.*
+import sbnz.integracija.example.facts.*;
+import sbnz.integracija.example.events.*;
 //dialect  "mvel"
 //
 //
@@ -33,17 +33,17 @@ import sbnz.integracija.example.events.*
 //
 //end
 
-rule "30+ views in the last 5 mins and less than 10 enrollments in the last 30 days -> 25% discount"
-    when
-        $c: Course($id: courseId) and
-        Number(intValue >= 30) from accumulate (
-            $e: CourseReview(courseId == $id) over window:time(5m),
-            count($e)
-        ) and
-        Number(intValue <= 10) from accumulate (
-            $en: CourseEnrollmentEvent(courseId == $id) over window:time(43200m),
-            count($en)
-        )
-    then
-        modify($c){setDiscountByEnrollment(25)}
-end
+//rule "30+ views in the last 5 mins and less than 10 enrollments in the last 30 days -> 25% discount"
+//    when
+//        $c: Course($id: courseId) and
+//        Number(intValue >= 30) from accumulate (
+//            $e: CourseReview(courseId == $id) over window:time(5m),
+//            count($e)
+//        ) and
+//        Number(intValue <= 10) from accumulate (
+//            $en: CourseEnrollmentEvent(courseId == $id) over window:time(43200m),
+//            count($en)
+//        )
+//    then
+//        modify($c){setDiscountByEnrollment(25)}
+//end
