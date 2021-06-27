@@ -5,20 +5,20 @@ import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.enums.PopularityCategory;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
-
+import java.util.UUID;
 
 import java.util.List;
 
-global String subId
-global String id;
+global UUID subId
+global UUID id;
 global String status;
 
 
 rule "Precondition courses"
     agenda-group "precondition"
     when
-        $c: Course(courseId.toString() == id, $preconditions: preconditions)
-        $s: Subscriber(userId.toString() == subId, $completed : completedCourses)
+        $c: Course(courseId == id, $preconditions: preconditions)
+        $s: Subscriber(userId == subId, $completed : completedCourses)
         Course(this memberOf $completed) from $preconditions
     then
     System.out.println($c);
@@ -30,8 +30,8 @@ end
 rule "Precondition courses for zero"
     agenda-group "precondition"
     when
-        $c: Course(courseId.toString() == id, $preconditions: preconditions.size() == 0)
-        $s: Subscriber(userId.toString() == subId)
+        $c: Course(courseId == id, $preconditions: preconditions.size() == 0)
+        $s: Subscriber(userId == subId)
 
     then
     System.out.println($c);

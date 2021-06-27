@@ -155,8 +155,8 @@ public class CourseServiceImpl implements CourseService {
         allCourses.forEach(c -> {
             kieSession.insert(c);
         });
-        kieSession.setGlobal("id", courseId.toString());
-        kieSession.setGlobal("subId", userId.toString());
+        kieSession.setGlobal("id", courseId);
+        kieSession.setGlobal("subId", userId);
         kieSession.setGlobal("status", "NO_PRECONDITION");
         kieSession.getAgenda().getAgendaGroup("precondition").setFocus();
         kieSession.fireAllRules();

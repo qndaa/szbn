@@ -47,6 +47,7 @@ public class SubscriberServiceImp implements SubscriberService {
         if (subscriberRepository.findByUsername(subscriberRequest.getUsername()) != null) {
             throw new IllegalArgumentException("Subscriber with username already exists!");
         }
+        KieSession kieSession = kieContainer.newKieSession("cepKsession");
 
         subscriberRequest.setBlocked(false);
         subscriberRequest.setDateOfRegistration(LocalDateTime.now());
@@ -59,7 +60,7 @@ public class SubscriberServiceImp implements SubscriberService {
         kieSession.getAgenda().getAgendaGroup("set-category").setFocus();
         kieSession.fireAllRules();
         System.out.println(subscriberRequest.getCategoryOfUser());
-
+        kieSession.dispose();
         return subscriberRepository.save(subscriberRequest);
     }
 
