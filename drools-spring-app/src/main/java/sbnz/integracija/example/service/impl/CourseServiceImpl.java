@@ -132,6 +132,35 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public String hasPrecondition(UUID userId, UUID courseId) {
+        System.out.println(courseId);
+        System.out.println(userId);
+        KieSession kieSession = kieContainer.newKieSession("cepKsession");
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        subscriber.setCanSubscribe(false);
+        kieSession.insert(subscriber);
+        Collection<Course> allCourses = courseRepository.findAll();
+        allCourses.forEach(c -> {
+            kieSession.insert(c);
+        });
+        kieSession.setGlobal("id", courseId.toString());
+        kieSession.setGlobal("subId", userId.toString());
+
+        kieSession.setGlobal("status", "NO_PRECONDITION");
+        kieSession.getAgenda().getAgendaGroup("precondition").setFocus();
+        kieSession.fireAllRules();
+
+
+        String ret = (String) kieSession.getGlobal("status");
+        System.out.println(subscriber.canSubscribe);
+
+
+        kieSession.dispose();
+
+        return (subscriber.canSubscribe) ? "OK" :"NO_PRECONDITION";
+    }
+
+    @Override
     public Collection<Course> getCoursesByTeacher(String id) {
         Collection<Course> courses = this.courseRepository.getCoursesByTeacher(UUID.fromString(id));
         courses.forEach(c -> cepSession.insert(c));

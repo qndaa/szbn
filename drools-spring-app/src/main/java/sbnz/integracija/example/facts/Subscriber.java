@@ -58,4 +58,9 @@ public class Subscriber extends User{
         l.minusMonths(m);
         return l;
     }
+
+    @Transient
+    public boolean canSubscribe;
+
+
 }

@@ -22,4 +22,6 @@ public interface CourseService {
     Collection<Course> getCoursesByAuthor(UUID authorId);
 
     Teacher getCourseTeacher(UUID courseId);
+
+    String hasPrecondition(UUID userId, UUID courseId);
 }

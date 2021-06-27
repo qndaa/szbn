@@ -9,21 +9,44 @@ import sbnz.integracija.example.facts.Subscriber;
 
 import java.util.List;
 
+global String subId
 global String id;
+global String status;
+
 
 rule "Precondition courses"
+    agenda-group "precondition"
     when
-        $s: Subscriber($completed: completedCourses)
-        $c: Course(courseId == id, $preconditions: preconditions)
-        Course($completed contains this) from $preconditions
+        $c: Course(courseId.toString() == id, $preconditions: preconditions)
+        $s: Subscriber(userId.toString() == subId, $completed : completedCourses)
+        Course(this memberOf $completed) from $preconditions
     then
+    System.out.println($c);
+    System.out.println($s);
+    modify($s){setCanSubscribe(true)}
 
-    modify($s){subscribeOnCourse($c)}
+end
+
+rule "Precondition courses for zero"
+    agenda-group "precondition"
+    when
+        $c: Course(courseId.toString() == id, $preconditions: preconditions.size() == 0)
+        $s: Subscriber(userId.toString() == subId)
+
+    then
+    System.out.println($c);
+    modify($s){setCanSubscribe(true)}
+
+
+
+
 //import sbnz.integracija.example.facts.Course;
 //import sbnz.integracija.example.facts.Subscriber;
 
 //
 end
+
+
 
 
 rule "not popular course -> less than 5 subsribers"

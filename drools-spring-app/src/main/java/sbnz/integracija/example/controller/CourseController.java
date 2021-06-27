@@ -84,7 +84,12 @@ public class CourseController {
     }
 
     @GetMapping("/teacher/{courseId}")
-    private ResponseEntity<Teacher> getCourseTeacher(@PathVariable UUID courseId) {
+    public ResponseEntity<Teacher> getCourseTeacher(@PathVariable UUID courseId) {
         return new ResponseEntity<>(courseService.getCourseTeacher(courseId), HttpStatus.OK);
+    }
+
+    @GetMapping("/hasPrecondition/{userId}/{courseId}")
+    public ResponseEntity<String> hasPrecondition(@PathVariable("courseId") UUID courseId, @PathVariable("userId") UUID userId) {
+        return new ResponseEntity<>(courseService.hasPrecondition(userId, courseId),HttpStatus.OK);
     }
 }

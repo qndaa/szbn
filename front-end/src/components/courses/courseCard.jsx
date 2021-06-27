@@ -19,7 +19,8 @@ class CourseCard extends React.Component {
                 surname: '',
                 username: ''
             },
-            preconditionsFullList: []
+            preconditionsFullList: [],
+            warning: 'NO'
         }
     }
 
@@ -192,7 +193,9 @@ class CourseCard extends React.Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    {this.props.perspective === 'allCourses' && <Button variant={'success'}>Buy</Button>}
+                    {this.renderWarning()}
+                    {this.renderDeleteButton(courseId)}
+                    {this.props.perspective === 'allCourses' && this.state.warning === 'NO' && <Button variant={'success'}>Buy</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'} onClick={this.quit}>Quit</Button>}
                     <Button onClick={this.hideModal}>Close</Button>
@@ -221,12 +224,19 @@ class CourseCard extends React.Component {
         }
     }
 
+    renderWarning = () => {
+        console.log(this.state.warning)
+        if (this.state.warning === 'YES') {
+            return (<p className={`text-danger`}>NO FINISHED ALL PRECONDITION</p>);
+        }
+    }
     deleteCourse = (id) => {
         return function () {
             console.log(id);
             api.delete('/courses/' + id).then(response => {
                 alert("Course deleted!");
                 this.props.history.push('/myCourses');
+
             });
         }
     }
@@ -241,6 +251,15 @@ class CourseCard extends React.Component {
         this.setState({
             showModal: true
         })
+
+        api.get("/courses/hasPrecondition/" + localStorage.getItem('id') + "/" +  this.props.course.courseId).then(response => {
+            console.log(response);
+            if (response.data === 'NO_PRECONDITION') {
+                this.setState({warning: "YES"});
+            }
+        })
+
+
     }
 
     hideModal = () => {
