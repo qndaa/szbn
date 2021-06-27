@@ -17,9 +17,9 @@ class AuthorLayout extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link as={NavLink} to="/author-report">Report</Nav.Link>
                     </Nav>
-                    <Nav className="mr-auto">
-                        <Nav.Link as={NavLink} to="/author-report">My Courses</Nav.Link>
-                    </Nav>
+                    {/*<Nav className="mr-auto">*/}
+                    {/*    <Nav.Link as={NavLink} to="/author-report">My Courses</Nav.Link>*/}
+                    {/*</Nav>*/}
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
                         <Nav>

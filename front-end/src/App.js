@@ -12,6 +12,7 @@ import AuthorHome from "./pages/authorHome";
 import AdminReport from "./pages/adminReport";
 import AdminBlockedUsers from "./pages/adminBlockedUsers";
 import AdminHome from "./pages/adminHome";
+import AuthorRegistration from "./pages/authorRegistration";
 
 class App extends React.Component {
 
@@ -31,14 +32,15 @@ class App extends React.Component {
                     <Route exact path="/courses" component={UserHome}/>
                     <Route exact path={`/registration`} component={Registration} />
                     <Route exact path={`/login`} component={Login} />
-                    <Route exact path={`/myCourses`} component={MyCourses} />
+                    <Route exact path={`/author-home`} component={MyCourses} />
                     <Route path={'/enrolled'} component={EnrolledCourses}/>
                     <Route path={'/finished'} component={FinishedCourses}/>
                     <Route path={'/author-report'} component={AuthorReport}/>
-                    <Route path={'/author-home'} component={AuthorHome}/>
+                    {/*<Route path={'/author-home'} component={AuthorHome}/>*/}
                     <Route path={'/admin-home'} component={AdminHome}/>
                     <Route path={'/admin-report'} component={AdminReport}/>
                     <Route path={'/block-unblock'} component={AdminBlockedUsers}/>
+                    <Route path={'/author-reg'} component={AuthorRegistration}/>
                 </Switch>
             </BrowserRouter>
         )

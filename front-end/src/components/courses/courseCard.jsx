@@ -196,6 +196,7 @@ class CourseCard extends React.Component {
                     {this.renderWarning()}
                     {this.renderDeleteButton(courseId)}
                     {this.props.perspective === 'allCourses' && this.state.warning === 'NO' && <Button variant={'success'}>Buy</Button>}
+
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'} onClick={this.quit}>Quit</Button>}
                     <Button onClick={this.hideModal}>Close</Button>
@@ -219,7 +220,7 @@ class CourseCard extends React.Component {
     }
 
     renderDeleteButton = (id) => {
-        if (localStorage.getItem('role') === 'TEACHER') {
+        if (localStorage.getItem('role') === 'TEACHER' || localStorage.getItem('role') === 'ADMINISTRATOR') {
             return (<Button className={`btn btn-danger`} onClick={this.deleteCourse(id)}>Delete</Button>);
         }
     }
@@ -231,12 +232,18 @@ class CourseCard extends React.Component {
         }
     }
     deleteCourse = (id) => {
-        return function () {
+        return () => {
             console.log(id);
             api.delete('/courses/' + id).then(response => {
                 alert("Course deleted!");
-                this.props.history.push('/myCourses');
+                //this.props.history.push('/myCourses');
 
+                // this.props.history.push('/myCourses');
+                // this.setState({
+                //     showModal : false
+                // })
+                // this.componentDidMount()
+                window.location.reload()
             });
         }
     }
@@ -293,4 +300,4 @@ class CourseCard extends React.Component {
     }
 }
 
-export default CourseCard
+export default withRouter(CourseCard)

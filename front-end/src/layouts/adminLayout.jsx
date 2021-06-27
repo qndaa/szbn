@@ -17,6 +17,7 @@ class AdminLayout extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link as={NavLink} to="/admin-report">Report</Nav.Link>
                         <Nav.Link as={NavLink} to="/block-unblock">Unblock</Nav.Link>
+                        <Nav.Link as={NavLink} to="/author-reg">Register teacher</Nav.Link>
                     </Nav>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto"/>
