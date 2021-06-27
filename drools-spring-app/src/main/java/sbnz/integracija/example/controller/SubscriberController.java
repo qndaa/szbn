@@ -77,4 +77,11 @@ public class SubscriberController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/discount/{userId}/{courseId}")
+    public ResponseEntity<Double> getDiscount(@PathVariable UUID userId, @PathVariable UUID courseId) {
+        Double ret = subscriberService.getDiscount(userId, courseId);
+        System.out.println("RETTTTT" + ret);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
 }

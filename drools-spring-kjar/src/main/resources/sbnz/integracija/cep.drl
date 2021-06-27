@@ -2,6 +2,7 @@
 //
 import sbnz.integracija.example.facts.*
 import sbnz.integracija.example.events.*
+
 //dialect  "mvel"
 //
 //
@@ -34,9 +35,11 @@ import sbnz.integracija.example.events.*
 //end
 
 rule "30+ views in the last 5 mins and less than 10 enrollments in the last 30 days -> 25% discount"
+    agenda-group "spec-course"
+    lock-on-active
     when
         $c: Course($id: courseId) and
-        Number(intValue >= 30) from accumulate (
+        Number(intValue >= 5) from accumulate (
             $e: CourseReview(courseId == $id) over window:time(5m),
             count($e)
         ) and

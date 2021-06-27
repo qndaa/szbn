@@ -24,4 +24,6 @@ public interface CourseService {
     Teacher getCourseTeacher(UUID courseId);
 
     String hasPrecondition(UUID userId, UUID courseId);
+
+    Course buy(UUID userId, UUID courseId);
 }

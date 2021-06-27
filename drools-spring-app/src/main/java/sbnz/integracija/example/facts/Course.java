@@ -33,6 +33,8 @@ public class Course {
     @Column(name = "course_id", nullable = false, unique = true)
     private UUID courseId;
 
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "COURSE_AREA",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
@@ -94,15 +96,30 @@ public class Course {
     @Column(name = "discountByEnrollment")
     private double discountByEnrollment;
 
-    @Column(name = "discountByReview")
-    private double discountByReview;
 
     @Column(name = "deleted")
     private boolean deleted;
 
+    private boolean precondition;
+
     @Override
     public String toString() {
-        return super.toString();
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseAreas=" + courseAreas +
+                ", duration=" + duration +
+                ", price=" + price +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", year=" + year +
+                ", levelOfCourse=" + levelOfCourse +
+                ", preconditions=" + preconditions +
+                ", skills=" + skills +
+                ", teacher=" + teacher +
+                ", popularity=" + popularity +
+                ", discountByEnrollment=" + discountByEnrollment +
+                ", deleted=" + deleted +
+                ", precondition=" + precondition +
+                '}';
     }
-    private boolean precondition;
 }

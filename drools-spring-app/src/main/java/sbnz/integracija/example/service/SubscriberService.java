@@ -26,4 +26,6 @@ public interface SubscriberService {
     void updateBlocked(UUID userId);
 
     void quitCourse(UUID userId, UUID courseId);
+
+    Double getDiscount(UUID userId, UUID courseId);
 }

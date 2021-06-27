@@ -92,4 +92,10 @@ public class CourseController {
     public ResponseEntity<String> hasPrecondition(@PathVariable("courseId") UUID courseId, @PathVariable("userId") UUID userId) {
         return new ResponseEntity<>(courseService.hasPrecondition(userId, courseId),HttpStatus.OK);
     }
+
+    @GetMapping("/buy/{userId}/{courseId}")
+    public ResponseEntity<Course> buy(@PathVariable("courseId") UUID courseId, @PathVariable("userId") UUID userId) {
+        return new ResponseEntity<>(courseService.buy(userId, courseId),HttpStatus.OK);
+    }
+
 }

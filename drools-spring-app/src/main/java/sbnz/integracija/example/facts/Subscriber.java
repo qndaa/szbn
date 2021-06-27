@@ -62,5 +62,16 @@ public class Subscriber extends User{
     @Transient
     public boolean canSubscribe;
 
-
+    @Override
+    public String toString() {
+        return "Subscriber{" +
+                "subscribedCourses=" + subscribedCourses +
+                ", completedCourses=" + completedCourses +
+                ", categoryOfUser=" + categoryOfUser +
+                ", discount=" + discount +
+                ", dateOfRegistration=" + dateOfRegistration +
+                ", blocked=" + blocked +
+                ", canSubscribe=" + canSubscribe +
+                '}';
+    }
 }

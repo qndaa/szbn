@@ -4,6 +4,7 @@ import course from "../../course.jpg";
 import api from "../../api/ApiUrl";
 import axios from "axios";
 import SubscriberListing from "../subscriberListing";
+import {withRouter} from "react-router-dom";
 
 class CourseCard extends React.Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class CourseCard extends React.Component {
                 username: ''
             },
             preconditionsFullList: [],
-            warning: 'NO'
+            warning: 'NO',
+            discountForCategory : 0
         }
     }
 
@@ -55,6 +57,52 @@ class CourseCard extends React.Component {
         }
     }
 
+    renderSpecialDiscount = () => {
+        if (this.props.course.discountByEnrollment !== 0) {
+            return (<small className="ml-4 text-danger">    Special discount: {this.props.course.discountByEnrollment} %</small>);
+        }
+    }
+
+    renderTrSpecialDiscount = () => {
+        if (this.props.course.discountByEnrollment !== 0) {
+            return (
+                <tr>
+                    <td>Course special discount</td>
+                    <td>{this.props.course.discountByEnrollment} %</td>
+                </tr>
+            );
+        }
+    }
+
+    renderDiscountForCategory = () => {
+        return (
+            <tr>
+                <td>Discount for category</td>
+                <td>{this.state.discountForCategory} %</td>
+            </tr>
+        );
+    }
+
+    renderNewPrice = () => {
+        if (this.state.discountForCategory !== 0 || this.props.course.discountByEnrollment !== 0) {
+            let newPrice = this.props.course.price;
+            let dis1 = this.state.discountForCategory / 100;
+            let dis2 = this.props.course.discountByEnrollment / 100;
+            newPrice = newPrice - (newPrice * dis1);
+            console.log(newPrice)
+            newPrice = newPrice - (newPrice * dis2);
+            console.log(newPrice)
+
+            return (
+                <tr>
+                    <td>Price with discount</td>
+                    <td className={`text-danger`}>${newPrice}</td>
+                </tr>
+            );
+        }
+
+    }
+
     render() {
         const {title, price, description, duration, courseAreas, year, levelOfCourse, preconditions, skills, popularity} = this.props.course
         const {courseId} = this.props.course
@@ -70,7 +118,11 @@ class CourseCard extends React.Component {
                     </Card.Text>
                     <Card.Text>
                         <small className="text-muted">Price: {price}</small>
+                        {this.renderSpecialDiscount()}
+
                     </Card.Text>
+
+
                 </Card.Body>
                 <Card.Footer>
                         <Button onClick={this.showModal}>See more</Button>
@@ -189,13 +241,19 @@ class CourseCard extends React.Component {
                             <td>Price</td>
                             <td>${price}</td>
                         </tr>
+
+                        {this.renderTrSpecialDiscount()}
+
+                        {this.renderDiscountForCategory ()}
+
+                        {this.renderNewPrice()}
                     </Table>
 
                 </Modal.Body>
                 <Modal.Footer>
                     {this.renderWarning()}
                     {this.renderDeleteButton(courseId)}
-                    {this.props.perspective === 'allCourses' && this.state.warning === 'NO' && <Button variant={'success'}>Buy</Button>}
+                    {this.props.perspective === 'allCourses' && this.state.warning === 'NO' && <Button variant={'success'} onClick={this.buyCourse}>Buy</Button>}
 
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'success'}>Finish</Button>}
                     {this.props.perspective === 'enrolledCourses' && <Button variant={'secondary'} onClick={this.quit}>Quit</Button>}
@@ -217,6 +275,13 @@ class CourseCard extends React.Component {
 
             </div>
         )
+    }
+
+    buyCourse = () => {
+        api.get('/courses/buy/'+ localStorage.getItem('id') + "/" +  this.props.course.courseId).then(response => {
+            alert("Success!");
+            this.props.history.push('/enrolled');
+        })
     }
 
     renderDeleteButton = (id) => {
@@ -266,6 +331,11 @@ class CourseCard extends React.Component {
             }
         })
 
+        api.get('/users/discount/'+ localStorage.getItem('id') + "/" +  this.props.course.courseId).then(response => {
+            console.log(response);
+            this.setState({discountForCategory : response.data});
+        })
+
 
     }
 
@@ -273,6 +343,7 @@ class CourseCard extends React.Component {
         this.setState({
             showModal: false
         })
+        window.location.reload()
     }
 
     showSubsModal = () => {

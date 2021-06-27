@@ -10,6 +10,9 @@ import sbnz.integracija.example.enums.CategoryOfUser;
 import sbnz.integracija.example.enums.TypeOfUser;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.Subscriber;
+import sbnz.integracija.example.facts.Teacher;
+import sbnz.integracija.example.repository.AuthorRepository;
+import sbnz.integracija.example.repository.CourseRepository;
 import sbnz.integracija.example.repository.SubscriberRepository;
 import sbnz.integracija.example.service.SubscriberService;
 
@@ -22,12 +25,20 @@ public class SubscriberServiceImp implements SubscriberService {
 
 
     SubscriberRepository subscriberRepository;
+    CourseRepository courseRepository;
     KieSession kieSession;
+    KieContainer kieContainer;
+    AuthorRepository authorRepository;
+
+
 
     @Autowired
-    public SubscriberServiceImp(KieSession kieSession, SubscriberRepository subscriberRepository) {
+    public SubscriberServiceImp(KieSession kieSession, SubscriberRepository subscriberRepository, CourseRepository courseRepository, KieContainer kieContainer, AuthorRepository authorRepository) {
         this.kieSession = kieSession;
         this.subscriberRepository = subscriberRepository;
+        this.courseRepository = courseRepository;
+        this.kieContainer = kieContainer;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -118,5 +129,27 @@ public class SubscriberServiceImp implements SubscriberService {
                 .collect(Collectors.toSet());
         subscriber.get().setSubscribedCourses(courses);
         subscriberRepository.save(subscriber.get());
+    }
+
+    @Override
+    public Double getDiscount(UUID userId, UUID courseId) {
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        KieSession kieSession = kieContainer.newKieSession("cepKsession");
+
+        Course course = courseRepository.findById(courseId).get();
+        kieSession.insert(subscriber);
+        kieSession.getAgenda().getAgendaGroup("category-discount").setFocus();
+        kieSession.fireAllRules();
+
+        kieSession.setGlobal("idTeacher", course.getTeacher().getUserId());
+        Teacher teacher = authorRepository.findById(course.getTeacher().getUserId()).get();
+        kieSession.insert(teacher);
+        subscriber.getCompletedCourses().forEach(kieSession::insert);
+
+        kieSession.getAgenda().getAgendaGroup("special-discount").setFocus();
+
+        kieSession.fireAllRules();
+
+        return subscriber.getDiscount();
     }
 }

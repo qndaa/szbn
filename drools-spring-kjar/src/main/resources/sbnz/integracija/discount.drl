@@ -6,9 +6,8 @@ import sbnz.integracija.example.facts.Subscriber;
 
 rule "Basic Users - 0%"
     agenda-group "category-discount"
-    salience 100
     when
-        $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
+        $s: Subscriber(categoryOfUser == CategoryOfUser.BASIC)
     then
         System.out.println("Discount for Basic user!");
         modify($s){setDiscount(0.0)}
@@ -17,7 +16,6 @@ end
 
 rule "Silver Users - 10%"
     agenda-group "category-discount"
-    salience 100
     when
         $s: Subscriber(categoryOfUser == CategoryOfUser.SILVER)
     then
@@ -29,7 +27,6 @@ end
 
 rule "Gold Users - 20%"
     agenda-group "category-discount"
-    salience 100
     when
         $s: Subscriber(categoryOfUser == CategoryOfUser.GOLD)
     then

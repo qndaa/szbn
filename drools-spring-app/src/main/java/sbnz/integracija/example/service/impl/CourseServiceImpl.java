@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.dto.CourseSearch;
 import sbnz.integracija.example.events.CourseEnrollmentEvent;
+import sbnz.integracija.example.events.CourseReview;
 import sbnz.integracija.example.events.CourseSearchEvent;
 import sbnz.integracija.example.facts.Course;
 import sbnz.integracija.example.facts.PrerequisiteCourses;
@@ -20,6 +21,7 @@ import sbnz.integracija.example.service.CourseService;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -145,19 +147,34 @@ public class CourseServiceImpl implements CourseService {
         });
         kieSession.setGlobal("id", courseId.toString());
         kieSession.setGlobal("subId", userId.toString());
-
         kieSession.setGlobal("status", "NO_PRECONDITION");
         kieSession.getAgenda().getAgendaGroup("precondition").setFocus();
         kieSession.fireAllRules();
 
-
-        String ret = (String) kieSession.getGlobal("status");
         System.out.println(subscriber.canSubscribe);
 
-
+        Collection<Course> courses = this.courseRepository.findAll();
+        courses.forEach(cepSession::insert);
+        CourseReview cr = new CourseReview(courseId);
+        cepSession.insert(cr);
+        cepSession.getAgenda().getAgendaGroup("spec-course").setFocus();
+        cepSession.fireAllRules();
+        courses.forEach(courseRepository::save);
         kieSession.dispose();
 
+
+
         return (subscriber.canSubscribe) ? "OK" :"NO_PRECONDITION";
+    }
+
+    @Override
+    public Course buy(UUID userId, UUID courseId) {
+        Course course = courseRepository.findById(courseId).get();
+        Subscriber subscriber = subscriberRepository.findById(userId).get();
+        subscriber.getSubscribedCourses().add(course);
+        subscriberRepository.save(subscriber);
+
+        return course;
     }
 
     @Override

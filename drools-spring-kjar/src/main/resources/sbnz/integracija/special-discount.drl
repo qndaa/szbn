@@ -2,14 +2,16 @@ package sbnz.integracija;
 
 import sbnz.integracija.example.facts.Subscriber;
 import sbnz.integracija.example.facts.Course;
+import sbnz.integracija.example.facts.Teacher;
 
 
 global String area;
-global String idAuthor;
+global Teacher teacherGlob;
+global java.util.UUID idTeacher;
 
 
 rule "Special discout when subscriber has two and more completed courses in same area!"
-    agenda-group "special-discout"
+    agenda-group "special-discount"
     lock-on-active true
     when
         $s: Subscriber($courses : completedCourses)
@@ -22,14 +24,24 @@ rule "Special discout when subscriber has two and more completed courses in same
 end
 
 rule "Special discout when subscriber has two and more completed courses by the same author!"
-    agenda-group "special-discout"
+    agenda-group "special-discount"
     lock-on-active true
     when
-        $s: Subscriber($courses : completedCourses)
-                Number (intValue >= 2) from accumulate(
-                    Course($t: teacher, $t.userId == idAuthor ) from $courses,
-                    count($t)
-                )
+//        $s: Subscriber($courses : completedCourses)
+//                Number (intValue >= 2) from accumulate(
+//                    Course($t: teacher, $t.userId.toString() == idAuthor ) from $courses,
+//                    count($t)
+//                )
+
+        $s: Subscriber($courses: completedCourses)
+        $t: Teacher(userId == idTeacher)
+            Number(intValue >= 2) from accumulate (
+                Course($c: this, $c memberOf $t.courses) from $courses,
+                count($c)
+            )
         then
+
+            System.out.println($s);
+            System.out.println("IMAAA DVA UCITELJA");
             modify($s){incrementDiscount(10)}
 end
