@@ -8,6 +8,7 @@ import org.kie.api.definition.type.Role;
 import org.kie.api.definition.type.Timestamp;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Role(Role.Type.EVENT)
@@ -19,11 +20,11 @@ import java.util.UUID;
 public class CourseEnrollmentEvent {
     private UUID userId;
     private UUID courseId;
-    private LocalDateTime timestamp;
+    private Date timestamp;
 
     public CourseEnrollmentEvent(UUID userId, UUID courseId) {
         this.userId = userId;
         this.courseId = courseId;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = new Date();
     }
 }

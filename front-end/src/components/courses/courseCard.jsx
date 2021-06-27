@@ -277,8 +277,18 @@ class CourseCard extends React.Component {
         )
     }
 
-    buyCourse = () => {
-        api.get('/courses/buy/'+ localStorage.getItem('id') + "/" +  this.props.course.courseId).then(response => {
+    buyCourse = async () => {
+        await axios
+            .get('http://localhost:8080/users/subscriber/' + localStorage.getItem('id'))
+            .then(res => {
+                if(res.data) {
+                    localStorage.setItem("id", null);
+                    localStorage.setItem("role", null);
+                    this.props.history.push('/login');
+                }
+            })
+
+        await api.get('/courses/buy/'+ localStorage.getItem('id') + "/" +  this.props.course.courseId).then(response => {
             alert("Success!");
             this.props.history.push('/enrolled');
         })

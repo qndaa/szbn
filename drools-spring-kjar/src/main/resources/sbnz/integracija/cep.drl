@@ -3,6 +3,7 @@
 import sbnz.integracija.example.facts.*
 import sbnz.integracija.example.events.*
 
+
 //dialect  "mvel"
 //
 //
