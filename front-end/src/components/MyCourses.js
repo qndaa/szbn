@@ -305,7 +305,7 @@ class MyCourses extends React.Component {
             await api.post("/courses/create/" + localStorage.getItem('id'), this.state.course).then(response => {
                 console.log(response);
                 alert("Success");
-                this.props.history.push('/myCourses');
+                this.props.history.push('/author-home');
                 this.setState({course: new Course()});
                 this.componentDidMount();
                 this.setState({addCourseModal: false});
